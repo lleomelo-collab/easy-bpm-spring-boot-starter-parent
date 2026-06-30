@@ -100,7 +100,7 @@ public class MessageWhiteListDO extends Model<MessageWhiteListDO> {
 
 
     @Override
-    protected Serializable pkVal() {
+    public Serializable pkVal() {
         return this.whiteId;
     }
 

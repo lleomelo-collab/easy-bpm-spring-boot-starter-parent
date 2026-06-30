@@ -42,9 +42,6 @@ public class ServiceTaskParseHandler extends AbstractActivityBpmnParseHandler<Se
             if (serviceTask.getType().equalsIgnoreCase("mail")) {
                 serviceTask.setBehavior(bpmnParse.getActivityBehaviorFactory().createMailActivityBehavior(serviceTask));
 
-            } else if (serviceTask.getType().equalsIgnoreCase("mule")) {
-                serviceTask.setBehavior(bpmnParse.getActivityBehaviorFactory().createMuleActivityBehavior(serviceTask));
-
             } else if (serviceTask.getType().equalsIgnoreCase("camel")) {
                 serviceTask.setBehavior(bpmnParse.getActivityBehaviorFactory().createCamelActivityBehavior(serviceTask));
 

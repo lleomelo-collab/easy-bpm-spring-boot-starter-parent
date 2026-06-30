@@ -109,7 +109,7 @@ public class ConfigTemplateDO extends Model<ConfigTemplateDO> {
 
 
     @Override
-    protected Serializable pkVal() {
+    public Serializable pkVal() {
         return this.templateId;
     }
 

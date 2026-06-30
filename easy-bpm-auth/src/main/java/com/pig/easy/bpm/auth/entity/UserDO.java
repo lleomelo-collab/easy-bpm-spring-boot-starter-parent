@@ -177,7 +177,7 @@ public class UserDO extends Model<UserDO> {
 
 
     @Override
-    protected Serializable pkVal() {
+    public Serializable pkVal() {
         return this.id;
     }
 

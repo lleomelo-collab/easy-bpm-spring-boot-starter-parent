@@ -2,7 +2,7 @@ package com.pig.easy.bpm.common.utils.ip;
 
 import com.pig.easy.bpm.common.utils.html.EscapeUtil;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 

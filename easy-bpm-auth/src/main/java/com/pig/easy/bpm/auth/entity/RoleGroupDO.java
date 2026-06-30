@@ -110,7 +110,7 @@ public class RoleGroupDO extends Model<RoleGroupDO> {
 
 
     @Override
-    protected Serializable pkVal() {
+    public Serializable pkVal() {
         return this.roleGroupId;
     }
 

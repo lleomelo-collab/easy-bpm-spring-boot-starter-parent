@@ -17,15 +17,15 @@ import com.pig.easy.bpm.common.utils.JsonResult;
 import com.pig.easy.bpm.common.utils.Result;
 import com.pig.easy.bpm.web.vo.request.RoleQueryVO;
 import com.pig.easy.bpm.web.vo.request.RoleSaveOrUpdateVO;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.List;
@@ -46,7 +46,7 @@ public class RoleController extends BaseController {
     @Autowired
     RoleService service;
 
-    @ApiOperation(value = "查询角色表列表", notes = "查询角色表列表", produces = "application/json")
+    @Operation(summary = "查询角色表列表", description = "查询角色表列表")
     @PostMapping("/getListPage")
     public JsonResult getListPage(@Valid @RequestBody RoleQueryVO param) {
 
@@ -60,7 +60,7 @@ public class RoleController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "查询角色表列表", notes = "查询角色表列表", produces = "application/json")
+    @Operation(summary = "查询角色表列表", description = "查询角色表列表")
     @PostMapping("/getList")
     public JsonResult getList(@Valid @RequestBody RoleQueryVO param) {
 
@@ -74,7 +74,7 @@ public class RoleController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "新增角色表", notes = "新增角色表", produces = "application/json")
+    @Operation(summary = "新增角色表", description = "新增角色表")
     @PostMapping("/insert")
     public JsonResult insertRole(@Valid @RequestBody RoleSaveOrUpdateVO param) {
 
@@ -88,7 +88,7 @@ public class RoleController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "修改角色表", notes = "修改角色表", produces = "application/json")
+    @Operation(summary = "修改角色表", description = "修改角色表")
     @PostMapping("/update")
     public JsonResult updateRole(@Valid @RequestBody RoleSaveOrUpdateVO param) {
 
@@ -102,7 +102,7 @@ public class RoleController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "删除角色表", notes = "删除角色表", produces = "application/json")
+    @Operation(summary = "删除角色表", description = "删除角色表")
     @PostMapping("/deleteById")
     public JsonResult deleteById(@Valid @RequestBody RoleSaveOrUpdateVO param) {
 
@@ -117,7 +117,7 @@ public class RoleController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "下载角色表", notes = "下载角色表", produces = "application/json")
+    @Operation(summary = "下载角色表", description = "下载角色表")
     @PostMapping("download")
     public void download(HttpServletResponse response,@Valid @RequestBody RoleQueryVO param) throws IOException {
 
@@ -132,7 +132,7 @@ public class RoleController extends BaseController {
         EasyExcel.write(response.getOutputStream(), RoleExportDTO.class).registerConverter(new LocalDateTimeConverter()).sheet().doWrite(result.getData());
     }
 
-    @ApiOperation(value = "根据编号获取角色表", notes = "根据编号获取角色表", produces = "application/json")
+    @Operation(summary = "根据编号获取角色表", description = "根据编号获取角色表")
     @PostMapping("/getById")
     public JsonResult getById(@Valid @RequestBody RoleSaveOrUpdateVO param) {
 

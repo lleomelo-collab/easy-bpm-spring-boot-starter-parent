@@ -13,14 +13,14 @@ import com.pig.easy.bpm.common.utils.JsonResult;
 import com.pig.easy.bpm.common.utils.Result;
 import com.pig.easy.bpm.web.vo.request.ApplyAddVO;
 import com.pig.easy.bpm.web.vo.request.LineChartQueryVO;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
-import javax.validation.Valid;
+import jakarta.annotation.Resource;
+import jakarta.validation.Valid;
 
 /**
  * <p>
@@ -32,13 +32,13 @@ import javax.validation.Valid;
  */
 @RestController
 @RequestMapping("/apply")
-@Api(tags = "申请单管理", value = "申请单管理")
+@Tag(name = "申请单管理")
 public class ApplyController extends BaseController {
 
     @Resource
     private ApplyService applyService;
 
-    @ApiOperation(value = "发起流程", notes = "发起流程", produces = "application/json")
+    @Operation(summary = "发起流程", description = "发起流程")
     @PostMapping("/startProcess")
     public JsonResult startPocess(@Valid @RequestBody ApplyAddVO applyAddVO) {
 
@@ -60,7 +60,7 @@ public class ApplyController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "保存为草稿流程", notes = "保存为草稿流程", produces = "application/json")
+    @Operation(summary = "保存为草稿流程", description = "保存为草稿流程")
     @PostMapping("/saveDraftApply")
     public JsonResult saveDraftApply(@Valid @RequestBody ApplyAddVO applyAddVO) {
 
@@ -82,9 +82,9 @@ public class ApplyController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "获取审批详情", notes = "获取审批详情", produces = "application/json")
+    @Operation(summary = "获取审批详情", description = "获取审批详情")
     @PostMapping("/getApproveDetail/{taskId}")
-    public JsonResult getApproveDetail(@ApiParam(required = true, name = "任务编号", value = "taskId", example = "1") @PathVariable("taskId") Long taskId) {
+    public JsonResult getApproveDetail(@Parameter(required = true, name = "taskId", description = "任务编号", example = "1") @PathVariable("taskId") Long taskId) {
 
         Result<ApproveTaskDTO> result = applyService.getApproveDetail(taskId);
         if (result.getEntityError().getCode() != EntityError.SUCCESS.getCode()) {
@@ -93,9 +93,9 @@ public class ApplyController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "获取申请详情", notes = "获取申请详情", produces = "application/json")
+    @Operation(summary = "获取申请详情", description = "获取申请详情")
     @PostMapping("/getApplyDetail/{applyId}")
-    public JsonResult getApplyDetail(@ApiParam(required = true, name = "申请编号", value = "applyId", example = "1") @PathVariable("applyId") Long applyId) {
+    public JsonResult getApplyDetail(@Parameter(required = true, name = "applyId", description = "申请编号", example = "1") @PathVariable("applyId") Long applyId) {
 
         Result<ApproveTaskDTO> result = applyService.getApplyDetail(applyId);
         if (result.getEntityError().getCode() != EntityError.SUCCESS.getCode()) {
@@ -104,7 +104,7 @@ public class ApplyController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "获取折线图数据", notes = "获取折线图数据", produces = "application/json")
+    @Operation(summary = "获取折线图数据", description = "获取折线图数据")
     @PostMapping("/getApplyLineChart")
     public JsonResult getApplyLineChart(@RequestBody LineChartQueryVO lineChartQueryVO) {
 

@@ -84,7 +84,7 @@ public class TemplateGroupDO extends Model<TemplateGroupDO> {
 
 
     @Override
-    protected Serializable pkVal() {
+    public Serializable pkVal() {
         return this.templateGroupId;
     }
 

@@ -16,13 +16,13 @@ import com.pig.easy.bpm.common.utils.JsonResult;
 import com.pig.easy.bpm.common.utils.Result;
 import com.pig.easy.bpm.web.vo.request.DictItemQueryVO;
 import com.pig.easy.bpm.web.vo.request.DictItemSaveOrUpdateVO;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.List;
@@ -43,7 +43,7 @@ public class DictItemController {
     @Autowired
     DictItemService service;
 
-    @ApiOperation(value = "查询字典详细表列表", notes = "查询字典详细表列表", produces = "application/json")
+    @Operation(summary = "查询字典详细表列表", description = "查询字典详细表列表")
     @PostMapping("/getListPage")
     public JsonResult getListPage(@Valid @RequestBody DictItemQueryVO param) {
 
@@ -57,7 +57,7 @@ public class DictItemController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "查询字典详细表列表", notes = "查询字典详细表列表", produces = "application/json")
+    @Operation(summary = "查询字典详细表列表", description = "查询字典详细表列表")
     @PostMapping("/getList")
     public JsonResult getList(@Valid @RequestBody DictItemQueryVO param) {
 
@@ -71,7 +71,7 @@ public class DictItemController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "新增字典详细表", notes = "新增字典详细表", produces = "application/json")
+    @Operation(summary = "新增字典详细表", description = "新增字典详细表")
     @PostMapping("/insert")
     public JsonResult insertDictItem(@Valid @RequestBody DictItemSaveOrUpdateVO param) {
 
@@ -85,7 +85,7 @@ public class DictItemController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "修改字典详细表", notes = "修改字典详细表", produces = "application/json")
+    @Operation(summary = "修改字典详细表", description = "修改字典详细表")
     @PostMapping("/update")
     public JsonResult updateDictItem(@Valid @RequestBody DictItemSaveOrUpdateVO param) {
 
@@ -99,7 +99,7 @@ public class DictItemController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "删除字典详细表", notes = "删除字典详细表", produces = "application/json")
+    @Operation(summary = "删除字典详细表", description = "删除字典详细表")
     @PostMapping("/deleteById")
     public JsonResult deleteById(@Valid @RequestBody DictItemSaveOrUpdateVO param) {
 
@@ -114,7 +114,7 @@ public class DictItemController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "下载字典详细表", notes = "下载字典详细表", produces = "application/json")
+    @Operation(summary = "下载字典详细表", description = "下载字典详细表")
     @PostMapping("download")
     public void download(HttpServletResponse response,@Valid @RequestBody DictItemQueryVO param) throws IOException {
 
@@ -129,7 +129,7 @@ public class DictItemController {
         EasyExcel.write(response.getOutputStream(), DictItemExportDTO.class).registerConverter(new LocalDateTimeConverter()).sheet().doWrite(result.getData());
     }
 
-    @ApiOperation(value = "根据编号获取字典详细表", notes = "根据编号获取字典详细表", produces = "application/json")
+    @Operation(summary = "根据编号获取字典详细表", description = "根据编号获取字典详细表")
     @PostMapping("/getById")
     public JsonResult getById(@Valid @RequestBody DictItemSaveOrUpdateVO param) {
 
@@ -143,9 +143,9 @@ public class DictItemController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "根据字典编码获取字典详细列表", notes = "根据字典编码获取字典详细列表", produces = "application/json")
+    @Operation(summary = "根据字典编码获取字典详细列表", description = "根据字典编码获取字典详细列表")
     @PostMapping("/getListByDictCode/{dictCode}")
-    public JsonResult getListByDictCode(@ApiParam(required = true, name = "字典编码", value = "dictCode", example = "pig") @PathVariable("dictCode") String dictCode) {
+    public JsonResult getListByDictCode(@Parameter(required = true, name = "dictCode", description = "字典编码", example = "pig") @PathVariable("dictCode") String dictCode) {
 
         EasyBpmAsset.isAssetEmpty(dictCode);
 

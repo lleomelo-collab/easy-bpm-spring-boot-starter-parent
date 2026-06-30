@@ -3,7 +3,7 @@ package com.pig.easy.bpm.web.vo.request;
 import lombok.Data;
 import lombok.ToString;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Map;
 

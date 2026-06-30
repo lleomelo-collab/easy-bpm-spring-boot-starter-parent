@@ -1,10 +1,10 @@
 package com.pig.easy.bpm.web.vo.request;
 
-import io.swagger.annotations.ApiModel;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.ToString;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Map;
 
@@ -16,7 +16,7 @@ import java.util.Map;
  */
 @Data
 @ToString
-@ApiModel("发起流程")
+@Schema(description = "发起流程")
 public class ApplyAddVO implements Serializable {
 
     private static final long serialVersionUID = -1904908751341094576L;

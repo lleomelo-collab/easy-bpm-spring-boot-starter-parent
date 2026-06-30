@@ -149,7 +149,7 @@ public class MenuDO extends Model<MenuDO> {
 
 
     @Override
-    protected Serializable pkVal() {
+    public Serializable pkVal() {
         return this.menuId;
     }
 

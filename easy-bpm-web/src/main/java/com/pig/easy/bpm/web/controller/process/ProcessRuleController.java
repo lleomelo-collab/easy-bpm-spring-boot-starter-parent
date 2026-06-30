@@ -8,9 +8,9 @@ import com.pig.easy.bpm.api.dto.request.*;
 import com.pig.easy.bpm.api.dto.response.*;
 import org.springframework.web.bind.annotation.*;
 import com.pig.easy.bpm.api.service.ProcessRuleService;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import com.github.pagehelper.PageInfo;
 import com.pig.easy.bpm.common.entityError.EntityError;
 import com.pig.easy.bpm.common.utils.BeanUtils;
@@ -21,7 +21,7 @@ import com.pig.easy.bpm.common.converter.LocalDateTimeConverter;
 import java.io.IOException;
 import com.alibaba.excel.EasyExcel;
 
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
 
 import java.net.URLEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +45,7 @@ public class ProcessRuleController {
     @Autowired
     ProcessRuleService service;
 
-    @ApiOperation(value = "查询列表", notes = "查询列表", produces = "application/json")
+    @Operation(summary = "查询列表", description = "查询列表")
     @PostMapping("/getListPage")
     public JsonResult getListPage(@Valid @RequestBody ProcessRuleQueryVO param) {
 
@@ -59,7 +59,7 @@ public class ProcessRuleController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "查询列表", notes = "查询列表", produces = "application/json")
+    @Operation(summary = "查询列表", description = "查询列表")
     @PostMapping("/getList")
     public JsonResult getList(@Valid @RequestBody ProcessRuleQueryVO param) {
 
@@ -73,7 +73,7 @@ public class ProcessRuleController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "新增", notes = "新增", produces = "application/json")
+    @Operation(summary = "新增", description = "新增")
     @PostMapping("/insert")
     public JsonResult insertProcessRule(@Valid @RequestBody ProcessRuleSaveOrUpdateVO param) {
 
@@ -87,7 +87,7 @@ public class ProcessRuleController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "修改", notes = "修改", produces = "application/json")
+    @Operation(summary = "修改", description = "修改")
     @PostMapping("/update")
     public JsonResult updateProcessRule(@Valid @RequestBody ProcessRuleSaveOrUpdateVO param) {
 
@@ -101,7 +101,7 @@ public class ProcessRuleController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "删除", notes = "删除", produces = "application/json")
+    @Operation(summary = "删除", description = "删除")
     @PostMapping("/deleteById")
     public JsonResult deleteById(@Valid @RequestBody ProcessRuleSaveOrUpdateVO param) {
 
@@ -116,7 +116,7 @@ public class ProcessRuleController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "下载", notes = "下载", produces = "application/json")
+    @Operation(summary = "下载", description = "下载")
     @PostMapping("download")
     public void download(HttpServletResponse response,@Valid @RequestBody ProcessRuleQueryVO param) throws IOException {
 
@@ -131,7 +131,7 @@ public class ProcessRuleController {
         EasyExcel.write(response.getOutputStream(), ProcessRuleExportDTO.class).registerConverter(new LocalDateTimeConverter()).sheet().doWrite(result.getData());
     }
 
-    @ApiOperation(value = "根据编号获取", notes = "根据编号获取", produces = "application/json")
+    @Operation(summary = "根据编号获取", description = "根据编号获取")
     @PostMapping("/getById")
     public JsonResult getById(@Valid @RequestBody ProcessRuleSaveOrUpdateVO param) {
 

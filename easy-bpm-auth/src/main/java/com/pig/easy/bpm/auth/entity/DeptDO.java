@@ -145,7 +145,7 @@ public class DeptDO extends Model<DeptDO> {
 
 
     @Override
-    protected Serializable pkVal() {
+    public Serializable pkVal() {
         return this.deptId;
     }
 

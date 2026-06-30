@@ -109,7 +109,7 @@ public class DictItemDO extends Model<DictItemDO> {
 
 
     @Override
-    protected Serializable pkVal() {
+    public Serializable pkVal() {
         return this.itemId;
     }
 

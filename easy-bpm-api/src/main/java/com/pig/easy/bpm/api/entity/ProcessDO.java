@@ -139,7 +139,7 @@ public class ProcessDO extends Model<ProcessDO> {
 
 
     @Override
-    protected Serializable pkVal() {
+    public Serializable pkVal() {
         return this.processId;
     }
 

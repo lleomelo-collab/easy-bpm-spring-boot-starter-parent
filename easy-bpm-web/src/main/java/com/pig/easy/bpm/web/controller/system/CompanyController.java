@@ -20,15 +20,15 @@ import com.pig.easy.bpm.common.utils.Result;
 import com.pig.easy.bpm.web.vo.request.CompanyQueryVO;
 import com.pig.easy.bpm.web.vo.request.CompanySaveOrUpdateVO;
 import com.pig.easy.bpm.web.vo.request.TreeQueryVO;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.List;
@@ -49,7 +49,7 @@ public class CompanyController extends BaseController {
     @Autowired
     CompanyService service;
 
-    @ApiOperation(value = "查询公司表列表", notes = "查询公司表列表", produces = "application/json")
+    @Operation(summary = "查询公司表列表", description = "查询公司表列表")
     @PostMapping("/getListPage")
     public JsonResult getListPage(@Valid @RequestBody CompanyQueryVO param) {
 
@@ -63,7 +63,7 @@ public class CompanyController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "查询公司表列表", notes = "查询公司表列表", produces = "application/json")
+    @Operation(summary = "查询公司表列表", description = "查询公司表列表")
     @PostMapping("/getList")
     public JsonResult getList(@Valid @RequestBody CompanyQueryVO param) {
 
@@ -77,7 +77,7 @@ public class CompanyController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "新增公司表", notes = "新增公司表", produces = "application/json")
+    @Operation(summary = "新增公司表", description = "新增公司表")
     @PostMapping("/insert")
     public JsonResult insertCompany(@Valid @RequestBody CompanySaveOrUpdateVO param) {
 
@@ -91,7 +91,7 @@ public class CompanyController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "修改公司表", notes = "修改公司表", produces = "application/json")
+    @Operation(summary = "修改公司表", description = "修改公司表")
     @PostMapping("/update")
     public JsonResult updateCompany(@Valid @RequestBody CompanySaveOrUpdateVO param) {
 
@@ -105,7 +105,7 @@ public class CompanyController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "删除公司表", notes = "删除公司表", produces = "application/json")
+    @Operation(summary = "删除公司表", description = "删除公司表")
     @PostMapping("/deleteById")
     public JsonResult deleteById(@Valid @RequestBody CompanySaveOrUpdateVO param) {
 
@@ -120,7 +120,7 @@ public class CompanyController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "下载公司表", notes = "下载公司表", produces = "application/json")
+    @Operation(summary = "下载公司表", description = "下载公司表")
     @PostMapping("download")
     public void download(HttpServletResponse response,@Valid @RequestBody CompanyQueryVO param) throws IOException {
 
@@ -135,7 +135,7 @@ public class CompanyController extends BaseController {
         EasyExcel.write(response.getOutputStream(), CompanyExportDTO.class).registerConverter(new LocalDateTimeConverter()).sheet().doWrite(result.getData());
     }
 
-    @ApiOperation(value = "根据编号获取公司表", notes = "根据编号获取公司表", produces = "application/json")
+    @Operation(summary = "根据编号获取公司表", description = "根据编号获取公司表")
     @PostMapping("/getById")
     public JsonResult getById(@Valid @RequestBody CompanySaveOrUpdateVO param) {
 
@@ -149,7 +149,7 @@ public class CompanyController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "获取公司树", notes = "获取公司树", produces = "application/json")
+    @Operation(summary = "获取公司树", description = "获取公司树")
     @PostMapping("/getCompanyTree")
     public JsonResult getCompanyTree(@Valid @RequestBody TreeQueryVO treeQueryVO) {
 
@@ -160,7 +160,7 @@ public class CompanyController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "获取公司ID name 字典", notes = "获取公司字典", produces = "application/json")
+    @Operation(summary = "获取公司ID name 字典", description = "获取公司字典")
     @PostMapping("/getCompanyIdAndNameDictList")
     public JsonResult getCompanyIdAndNameDictList(@Valid @RequestBody CompanyQueryVO companyVO) {
 

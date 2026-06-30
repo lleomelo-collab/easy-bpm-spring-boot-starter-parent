@@ -121,7 +121,7 @@ public class FileTemplateDO extends Model<FileTemplateDO> {
 
 
     @Override
-    protected Serializable pkVal() {
+    public Serializable pkVal() {
         return this.tempalteId;
     }
 

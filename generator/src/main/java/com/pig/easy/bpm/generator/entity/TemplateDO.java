@@ -104,7 +104,7 @@ public class TemplateDO extends Model<TemplateDO> {
 
 
     @Override
-    protected Serializable pkVal() {
+    public Serializable pkVal() {
         return this.templateId;
     }
 
