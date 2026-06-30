@@ -1,0 +1,67 @@
+spring:
+  application:
+    name: easy-bpm-auth-test
+  profiles:
+    active: test
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=MySQL
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+    druid:
+      initialSize: 1
+      minIdle: 1
+      maxActive: 5
+      maxWait: 60000
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      maxEvictableIdleTimeMillis: 900000
+      validationQuery: SELECT 1
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+  data:
+    redis:
+      host: localhost
+      port: 6379
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
+      - org.springframework.boot.autoconfigure.data.redis.RedisRepositoriesAutoConfiguration
+      - com.alibaba.druid.spring.boot3.autoconfigure.DruidDataSourceAutoConfigure
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+  mapper-locations: classpath*:/mapper/*.xml
+
+pagehelper:
+  helperDialect: h2
+  reasonable: false
+  supportMethodsArguments: true
+  params: count=countSql
+
+easy:
+  bpm:
+    aspect:
+      enable: false
+
+redis:
+  enabled: false
+
+token:
+  header: Authorization
+  secret: testSecret123
+  issuer: easy-bpm-test
+  defaultUserPassword: 123456
+  expireTime: 30
+  refershExpireTime: 60
+
+logging:
+  level:
+    root: WARN

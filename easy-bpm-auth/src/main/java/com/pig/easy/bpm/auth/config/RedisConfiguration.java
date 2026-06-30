@@ -37,6 +37,7 @@ import java.util.Set;
 @Configuration
 @Slf4j
 @EnableCaching
+@org.springframework.boot.autoconfigure.condition.ConditionalOnProperty(name = "redis.enabled", havingValue = "true", matchIfMissing = true)
 public class RedisConfiguration implements CachingConfigurer {
 
     @Value("${redis.ip:}")
