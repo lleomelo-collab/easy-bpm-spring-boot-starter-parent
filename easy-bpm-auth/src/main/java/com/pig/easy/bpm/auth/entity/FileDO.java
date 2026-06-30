@@ -157,7 +157,7 @@ public class FileDO extends Model<FileDO> {
 
 
     @Override
-    protected Serializable pkVal() {
+    public Serializable pkVal() {
         return this.fileId;
     }
 

@@ -6,15 +6,15 @@ import com.pig.easy.bpm.auth.core.controller.BaseController;
 import com.pig.easy.bpm.common.entityError.EntityError;
 import com.pig.easy.bpm.common.utils.JsonResult;
 import com.pig.easy.bpm.common.utils.Result;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 /**
  * todo:
@@ -22,7 +22,7 @@ import javax.annotation.Resource;
  * @author : pig
  * @date : 2020/7/5 18:29
  */
-@Api(tags = "流程图详细信息", value = "流程图详细信息")
+@Tag(name = "流程图详细信息")
 @RestController
 @RequestMapping("/processDiagram")
 public class ProcessDiagramController extends BaseController {
@@ -30,10 +30,10 @@ public class ProcessDiagramController extends BaseController {
     @Resource
     ProcessDiagramService processDiagramService;
 
-    @ApiOperation(value = "获取图流程详细信息", notes = "获取图流程详细信息", produces = "application/json")
+    @Operation(summary = "获取图流程详细信息", description = "获取图流程详细信息")
     @PostMapping("/getProcessDiagramByApplyId/{applyId}")
     public JsonResult getProcessDiagramByApplyId(
-            @ApiParam(required = true, name = "申请编号", value = "applyId", example = "1") @PathVariable("applyId") Long applyId
+            @Parameter(required = true, name = "applyId", description = "申请编号", example = "1") @PathVariable("applyId") Long applyId
     ) {
         Result<ProcessDiagramDTO> result = processDiagramService.getProcessDiagramByApplyId(applyId);
         if (result.getEntityError().getCode() != EntityError.SUCCESS.getCode()) {

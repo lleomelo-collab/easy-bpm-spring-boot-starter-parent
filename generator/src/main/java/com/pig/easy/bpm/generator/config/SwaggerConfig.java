@@ -1,31 +1,24 @@
 package com.pig.easy.bpm.generator.config;
 
-import org.apache.commons.lang.StringUtils;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Contact;
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.info.License;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import springfox.documentation.builders.ApiInfoBuilder;
-import springfox.documentation.builders.PathSelectors;
-import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.service.Contact;
-import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
- * todo: swagger 配置 可放入
+ * OpenAPI configuration
  *
  * @author : pig
  * @date : 2020/5/15 14:00
  */
 @Configuration
-@EnableSwagger2
 @Profile({"local", "test", "prod"})
 public class SwaggerConfig {
 
-    @Value(value = "${swagger.controller:}")
-    private String controller;
     @Value(value = "${swagger.title:}")
     private String title;
     @Value(value = "${swagger.description:}")
@@ -44,27 +37,13 @@ public class SwaggerConfig {
     private String email;
 
     @Bean
-    public Docket createRestApi() {
-        checkData();
-        return new Docket(DocumentationType.SWAGGER_2)
-                .select()
-                .apis(RequestHandlerSelectors.basePackage(controller))
-                .paths(PathSelectors.any())
-                .build()
-                .apiInfo(new ApiInfoBuilder()
+    public OpenAPI customOpenAPI() {
+        return new OpenAPI()
+                .info(new Info()
                         .title(title)
                         .description(description)
                         .version(version)
-                        .license(license)
-                        .licenseUrl(licenseUrl)
-                        .contact(new Contact(author, authorBlogUrl, email))
-                        .build());
-    }
-
-    private void checkData() {
-        if (StringUtils.isEmpty(controller) || StringUtils.isEmpty(title)) {
-            throw new RuntimeException("SwaggerConfig init fail, please config on nacos");
-        }
-        System.out.println("SwaggerConfig  ############################## = " + title);
+                        .license(new License().name(license).url(licenseUrl))
+                        .contact(new Contact().name(author).url(authorBlogUrl).email(email)));
     }
 }

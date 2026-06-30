@@ -17,15 +17,15 @@ import com.pig.easy.bpm.common.utils.JsonResult;
 import com.pig.easy.bpm.common.utils.Result;
 import com.pig.easy.bpm.web.vo.request.FileTemplateQueryVO;
 import com.pig.easy.bpm.web.vo.request.FileTemplateSaveOrUpdateVO;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.List;
@@ -46,7 +46,7 @@ public class FileTemplateController extends BaseController {
     @Autowired
     FileTemplateService service;
 
-    @ApiOperation(value = "查询模板文件表列表", notes = "查询模板文件表列表", produces = "application/json")
+    @Operation(summary = "查询模板文件表列表", description = "查询模板文件表列表")
     @PostMapping("/getListPage")
     public JsonResult getListPage(@Valid @RequestBody FileTemplateQueryVO param) {
 
@@ -60,7 +60,7 @@ public class FileTemplateController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "查询模板文件表列表", notes = "查询模板文件表列表", produces = "application/json")
+    @Operation(summary = "查询模板文件表列表", description = "查询模板文件表列表")
     @PostMapping("/getList")
     public JsonResult getList(@Valid @RequestBody FileTemplateQueryVO param) {
 
@@ -74,7 +74,7 @@ public class FileTemplateController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "新增模板文件表", notes = "新增模板文件表", produces = "application/json")
+    @Operation(summary = "新增模板文件表", description = "新增模板文件表")
     @PostMapping("/insert")
     public JsonResult insertFileTemplate(@Valid @RequestBody FileTemplateSaveOrUpdateVO param) {
 
@@ -88,7 +88,7 @@ public class FileTemplateController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "修改模板文件表", notes = "修改模板文件表", produces = "application/json")
+    @Operation(summary = "修改模板文件表", description = "修改模板文件表")
     @PostMapping("/update")
     public JsonResult updateFileTemplate(@Valid @RequestBody FileTemplateSaveOrUpdateVO param) {
 
@@ -102,7 +102,7 @@ public class FileTemplateController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "删除模板文件表", notes = "删除模板文件表", produces = "application/json")
+    @Operation(summary = "删除模板文件表", description = "删除模板文件表")
     @PostMapping("/deleteById")
     public JsonResult deleteById(@Valid @RequestBody FileTemplateSaveOrUpdateVO param) {
 
@@ -117,7 +117,7 @@ public class FileTemplateController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "下载模板文件表", notes = "下载模板文件表", produces = "application/json")
+    @Operation(summary = "下载模板文件表", description = "下载模板文件表")
     @PostMapping("download")
     public void download(HttpServletResponse response,@Valid @RequestBody FileTemplateQueryVO param) throws IOException {
 
@@ -132,7 +132,7 @@ public class FileTemplateController extends BaseController {
         EasyExcel.write(response.getOutputStream(), FileTemplateExportDTO.class).registerConverter(new LocalDateTimeConverter()).sheet().doWrite(result.getData());
     }
 
-    @ApiOperation(value = "根据编号获取模板文件表", notes = "根据编号获取模板文件表", produces = "application/json")
+    @Operation(summary = "根据编号获取模板文件表", description = "根据编号获取模板文件表")
     @PostMapping("/getById")
     public JsonResult getById(@Valid @RequestBody FileTemplateSaveOrUpdateVO param) {
 

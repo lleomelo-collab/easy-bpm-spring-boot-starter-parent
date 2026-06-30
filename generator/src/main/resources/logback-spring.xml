@@ -18,13 +18,10 @@
     <!-- 日志文件输出 -->
     <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <File>${log.base}/${log.moduleName}/${log.moduleName}.log</File>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <FileNamePattern>${log.base}/${log.moduleName}/archive/${log.moduleName}_%d{yyyy-MM-dd}.%i.log.zip
             </FileNamePattern>
-            <!-- 当天的日志大小 超过${log.max.size}时,压缩日志并保存 -->
-            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxFileSize>${log.max.size}</maxFileSize>
-            </timeBasedFileNamingAndTriggeringPolicy>
+            <maxFileSize>${log.max.size}</maxFileSize>
         </rollingPolicy>
         <!-- 日志输出的文件的格式 -->
         <layout class="ch.qos.logback.classic.PatternLayout">
@@ -35,14 +32,10 @@
     <!-- [错误日志APPENDER] -->
     <appender name="file-error" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <File>${log.base}/${log.moduleName}/${log.moduleName}-error.log</File>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <FileNamePattern>${log.base}/${log.moduleName}/archive/${log.moduleName}_error_%d{yyyy-MM-dd}.%i.log
             </FileNamePattern>
-            <!-- 当天的日志大小 超过${log.max.size}时,压缩日志并保存 -->
-            <timeBasedFileNamingAndTriggeringPolicy
-                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxFileSize>${log.max.size}</maxFileSize>
-            </timeBasedFileNamingAndTriggeringPolicy>
+            <maxFileSize>${log.max.size}</maxFileSize>
         </rollingPolicy>
         <layout class="ch.qos.logback.classic.PatternLayout">
             <pattern><![CDATA[%date{yyyy-MM-dd HH:mm:ss.SSS} [%X{traceId}  %-5level[%.6thread]%logger{36}.%method<%L> %msg%n]]></pattern>
@@ -52,13 +45,10 @@
     <appender name="slow-web" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <File>${log.base}/${log.moduleName}/${log.moduleName}-slow-web.log
         </File>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <FileNamePattern>${log.base}/${log.moduleName}/archive/${log.moduleName}_slow-web_%d{yyyy-MM-dd}.%i.log
             </FileNamePattern>
-            <!-- 当天的日志大小 超过${log.max.size}时,压缩日志并保存 -->
-            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxFileSize>${log.max.size}</maxFileSize>
-            </timeBasedFileNamingAndTriggeringPolicy>
+            <maxFileSize>${log.max.size}</maxFileSize>
         </rollingPolicy>
         <layout class="ch.qos.logback.classic.PatternLayout">
             <pattern><![CDATA[%date{yyyy-MM-dd HH:mm:ss.SSS}  [%X{traceId} %-5level[%.6thread] %msg%n]]></pattern>
@@ -69,14 +59,10 @@
               class="ch.qos.logback.core.rolling.RollingFileAppender">
         <File>${log.base}/${log.moduleName}/${log.moduleName}-slow-sql-dbhelper.log
         </File>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <FileNamePattern>${log.base}/${log.moduleName}/archive/${log.moduleName}_slow-sql-dbhelper_%d{yyyy-MM-dd}.%i.log
             </FileNamePattern>
-            <!-- 当天的日志大小 超过${log.max.size}时,压缩日志并保存 -->
-            <timeBasedFileNamingAndTriggeringPolicy
-                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxFileSize>${log.max.size}</maxFileSize>
-            </timeBasedFileNamingAndTriggeringPolicy>
+            <maxFileSize>${log.max.size}</maxFileSize>
         </rollingPolicy>
         <layout class="ch.qos.logback.classic.PatternLayout">
             <pattern><![CDATA[%date{yyyy-MM-dd HH:mm:ss.SSS} %-5level[%.6thread]%logger{36}.%method<%L> %msg%n]]></pattern>
@@ -87,14 +73,10 @@
               class="ch.qos.logback.core.rolling.RollingFileAppender">
         <File>${log.base}/${log.moduleName}/${log.moduleName}-slow-sql-druid.log
         </File>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <FileNamePattern>${log.base}/${log.moduleName}/archive/${log.moduleName}_slow-sql-druid_%d{yyyy-MM-dd}.%i.log
             </FileNamePattern>
-            <!-- 当天的日志大小 超过${log.max.size}时,压缩日志并保存 -->
-            <timeBasedFileNamingAndTriggeringPolicy
-                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxFileSize>${log.max.size}</maxFileSize>
-            </timeBasedFileNamingAndTriggeringPolicy>
+            <maxFileSize>${log.max.size}</maxFileSize>
         </rollingPolicy>
         <layout class="ch.qos.logback.classic.PatternLayout">
             <pattern><![CDATA[%date{yyyy-MM-dd HH:mm:ss.SSS} [%X{traceId} %-5level[%.6thread]%logger{36}.%method<%L> %msg%n]]></pattern>

@@ -107,7 +107,7 @@ public class FormDO extends Model<FormDO> {
 
 
     @Override
-    protected Serializable pkVal() {
+    public Serializable pkVal() {
         return this.formId;
     }
 

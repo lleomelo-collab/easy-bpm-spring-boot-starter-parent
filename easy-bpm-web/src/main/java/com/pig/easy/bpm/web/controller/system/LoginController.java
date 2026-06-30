@@ -8,13 +8,13 @@ import com.pig.easy.bpm.common.entityError.EntityError;
 import com.pig.easy.bpm.common.utils.JsonResult;
 import com.pig.easy.bpm.common.utils.Result;
 import com.pig.easy.bpm.web.vo.request.LoginVO;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 /**
  * todo:
@@ -24,13 +24,13 @@ import javax.validation.Valid;
  */
 @RestController
 @RequestMapping("/login")
-@Api(tags = "登录管理", value = "登录管理")
+@Tag(name = "登录管理")
 public class LoginController extends BaseController {
 
     @Autowired
     UserService userService;
 
-    @ApiOperation(value = "用户登录", notes = "用户登录")
+    @Operation(summary = "用户登录", description = "用户登录")
     @RequestMapping("/login")
     @Login(false)
     public JsonResult login(@RequestBody @Valid LoginVO loginVO){
@@ -42,9 +42,9 @@ public class LoginController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "获取用户详情", notes = "获取用户详情",  produces = "application/json")
+    @Operation(summary = "获取用户详情", description = "获取用户详情")
     @PostMapping("/getUserInfo/{username}")
-    public JsonResult getUserInfo(@ApiParam(required = true, name = "用户名称", value = "username", example = "pig") @PathVariable("username") String username) {
+    public JsonResult getUserInfo(@Parameter(required = true, name = "username", description = "用户名称", example = "pig") @PathVariable("username") String username) {
 
         Result<UserDTO> result = userService.getUserInfo(username);
         if (result.getEntityError().getCode() != EntityError.SUCCESS.getCode()) {
@@ -53,7 +53,7 @@ public class LoginController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "退出登录", notes = "新增用户",  produces = "application/json")
+    @Operation(summary = "退出登录", description = "新增用户")
     @PostMapping("/logout")
     public JsonResult logout() {
 

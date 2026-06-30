@@ -15,7 +15,7 @@ import com.pig.easy.bpm.generator.service.TableStrategyConfigService;
 import com.pig.easy.bpm.generator.service.TemplateGroupService;
 import com.pig.easy.bpm.generator.utils.DbUtils;
 import com.pig.easy.bpm.generator.vo.request.*;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,8 +23,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +50,7 @@ public class CodeTableController {
     @Autowired
     TemplateGroupService templateGroupService;
 
-    @ApiOperation(value = "测试连接", notes = "测试连接", produces = "application/json")
+    @Operation(summary = "测试连接", description = "测试连接")
     @PostMapping("/testConn")
     public JsonResult testConn(@Valid @RequestBody DbConfigSaveOrUpdateVO param) {
 
@@ -65,7 +65,7 @@ public class CodeTableController {
     }
 
 
-    @ApiOperation(value = "查询策略列表", notes = "查询策略列表", produces = "application/json")
+    @Operation(summary = "查询策略列表", description = "查询策略列表")
     @PostMapping("/getStrategyConfigByDbId")
     public JsonResult getStrategyConfigByDbId(@Valid @RequestBody CodeTableVO codeTableVO) {
 
@@ -81,7 +81,7 @@ public class CodeTableController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "查询数据源列表", notes = "查询数据源列表", produces = "application/json")
+    @Operation(summary = "查询数据源列表", description = "查询数据源列表")
     @PostMapping("/getList")
     public JsonResult getTableInfoList(@Valid @RequestBody CodeTableVO codeTableVO) {
 
@@ -99,7 +99,7 @@ public class CodeTableController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "查询数据表字段列表", notes = "查询数据表字段列表", produces = "application/json")
+    @Operation(summary = "查询数据表字段列表", description = "查询数据表字段列表")
     @PostMapping("/getTableColumnList")
     public JsonResult getTableColumnList(@Valid @RequestBody CodeTableVO codeTableVO) {
 
@@ -112,7 +112,7 @@ public class CodeTableController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "保存或修改数据源表字段列表", notes = "保存或修改数据源表字段列表", produces = "application/json")
+    @Operation(summary = "保存或修改数据源表字段列表", description = "保存或修改数据源表字段列表")
     @PostMapping("/saveOrUpdateListAndGetList")
     public JsonResult saveOrUpdateListAndGetList(@Valid @RequestBody TableFieldSaveVO tableFieldSaveVO) {
 
@@ -132,7 +132,7 @@ public class CodeTableController {
     }
 
 
-    @ApiOperation(value = "下载代码", notes = "下载代码", produces = "application/json")
+    @Operation(summary = "下载代码", description = "下载代码")
     @RequestMapping("downloadZip")
     public void downloadZip(HttpServletResponse response,@Valid @RequestBody GeneratorVO generatorVO) {
 
@@ -166,7 +166,7 @@ public class CodeTableController {
         }
     }
 
-    @ApiOperation(value = "保存生成代码到本地", notes = "保存生成代码到本地", produces = "application/json")
+    @Operation(summary = "保存生成代码到本地", description = "保存生成代码到本地")
     @RequestMapping("gengratorCode")
     public JsonResult gengratorCode(@Valid @RequestBody GeneratorVO generatorVO) {
 
@@ -194,7 +194,7 @@ public class CodeTableController {
     }
 
 
-    @ApiOperation(value = "生成代码", notes = "生成代码", produces = "application/json")
+    @Operation(summary = "生成代码", description = "生成代码")
     @PostMapping("/initAndExecute")
     public JsonResult initAndExecute(@Valid @RequestBody GeneratorVO generatorVO) {
 

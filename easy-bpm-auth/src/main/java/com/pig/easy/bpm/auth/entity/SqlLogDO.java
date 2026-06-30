@@ -88,7 +88,7 @@ public class SqlLogDO extends Model<SqlLogDO> {
 
 
     @Override
-    protected Serializable pkVal() {
+    public Serializable pkVal() {
         return this.logId;
     }
 

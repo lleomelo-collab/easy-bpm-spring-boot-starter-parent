@@ -16,15 +16,15 @@ import com.pig.easy.bpm.common.utils.BeanUtils;
 import com.pig.easy.bpm.common.utils.EasyBpmAsset;
 import com.pig.easy.bpm.common.utils.JsonResult;
 import com.pig.easy.bpm.common.utils.Result;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.List;
@@ -45,7 +45,7 @@ public class VariableDictController {
     @Autowired
     VariableDictService service;
 
-    @ApiOperation(value = "查询变量表列表", notes = "查询变量表列表", produces = "application/json")
+    @Operation(summary = "查询变量表列表", description = "查询变量表列表")
     @PostMapping("/getListPage")
     public JsonResult getListPage(@Valid @RequestBody VariableDictQueryVO param) {
 
@@ -59,7 +59,7 @@ public class VariableDictController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "查询变量表列表", notes = "查询变量表列表", produces = "application/json")
+    @Operation(summary = "查询变量表列表", description = "查询变量表列表")
     @PostMapping("/getList")
     public JsonResult getList(@Valid @RequestBody VariableDictQueryVO param) {
 
@@ -73,7 +73,7 @@ public class VariableDictController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "新增变量表", notes = "新增变量表", produces = "application/json")
+    @Operation(summary = "新增变量表", description = "新增变量表")
     @PostMapping("/insert")
     public JsonResult insertVariableDict(@Valid @RequestBody VariableDictSaveOrUpdateVO param) {
 
@@ -87,7 +87,7 @@ public class VariableDictController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "修改变量表", notes = "修改变量表", produces = "application/json")
+    @Operation(summary = "修改变量表", description = "修改变量表")
     @PostMapping("/update")
     public JsonResult updateVariableDict(@Valid @RequestBody VariableDictSaveOrUpdateVO param) {
 
@@ -101,7 +101,7 @@ public class VariableDictController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "删除变量表", notes = "删除变量表", produces = "application/json")
+    @Operation(summary = "删除变量表", description = "删除变量表")
     @PostMapping("/deleteById")
     public JsonResult deleteById(@Valid @RequestBody VariableDictSaveOrUpdateVO param) {
 
@@ -116,7 +116,7 @@ public class VariableDictController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "下载变量表", notes = "下载变量表", produces = "application/json")
+    @Operation(summary = "下载变量表", description = "下载变量表")
     @PostMapping("download")
     public void download(HttpServletResponse response,@Valid @RequestBody VariableDictQueryVO param) throws IOException {
 
@@ -131,7 +131,7 @@ public class VariableDictController {
         EasyExcel.write(response.getOutputStream(), VariableDictExportDTO.class).registerConverter(new LocalDateTimeConverter()).sheet().doWrite(result.getData());
     }
 
-    @ApiOperation(value = "根据编号获取变量表", notes = "根据编号获取变量表", produces = "application/json")
+    @Operation(summary = "根据编号获取变量表", description = "根据编号获取变量表")
     @PostMapping("/getById")
     public JsonResult getById(@Valid @RequestBody VariableDictSaveOrUpdateVO param) {
 

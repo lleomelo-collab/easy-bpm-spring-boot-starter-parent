@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.jsontype.impl.LaissezFaireSubTypeValidator;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
@@ -12,7 +13,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.CacheManager;
-import org.springframework.cache.annotation.CachingConfigurerSupport;
+import org.springframework.cache.annotation.CachingConfigurer;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
@@ -21,6 +22,8 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
+import org.springframework.data.redis.connection.jedis.JedisClientConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.*;
@@ -34,7 +37,8 @@ import java.util.Set;
 @Configuration
 @Slf4j
 @EnableCaching
-public class RedisConfiguration extends CachingConfigurerSupport {
+@org.springframework.boot.autoconfigure.condition.ConditionalOnProperty(name = "redis.enabled", havingValue = "true", matchIfMissing = true)
+public class RedisConfiguration implements CachingConfigurer {
 
     @Value("${redis.ip:}")
     private String host;
@@ -71,23 +75,28 @@ public class RedisConfiguration extends CachingConfigurerSupport {
 
     private RedisConnectionFactory getRedisConnectionFactory() {
 
-        // 进行连接池配置
         JedisPoolConfig poolConfig = new JedisPoolConfig();
         poolConfig.setMaxTotal(maxActive);
         poolConfig.setMaxIdle(maxIdle);
         poolConfig.setMinIdle(minIdle);
-        poolConfig.setMaxWaitMillis(maxWait);
+        poolConfig.setMaxWait(Duration.ofMillis(maxWait));
         poolConfig.setTestOnBorrow(true);
         poolConfig.setTestWhileIdle(true);
         poolConfig.setTestOnReturn(true);
         poolConfig.setTestOnCreate(true);
-        JedisConnectionFactory jedisConnectionFactory = new JedisConnectionFactory();
-        jedisConnectionFactory.setHostName(host);
-        jedisConnectionFactory.setPort(port);
-        jedisConnectionFactory.setPassword(password);
-        jedisConnectionFactory.setDatabase(database);
-        jedisConnectionFactory.setPoolConfig(poolConfig);
-        return jedisConnectionFactory;
+
+        RedisStandaloneConfiguration redisConfig = new RedisStandaloneConfiguration();
+        redisConfig.setHostName(host);
+        redisConfig.setPort(port);
+        redisConfig.setPassword(password);
+        redisConfig.setDatabase(database);
+
+        JedisClientConfiguration clientConfig = JedisClientConfiguration.builder()
+                .usePooling()
+                .poolConfig(poolConfig)
+                .build();
+
+        return new JedisConnectionFactory(redisConfig, clientConfig);
     }
 
     @Bean
@@ -96,7 +105,7 @@ public class RedisConfiguration extends CachingConfigurerSupport {
         genericObjectPoolConfig.setMaxIdle(maxIdle);
         genericObjectPoolConfig.setMinIdle(minIdle);
         genericObjectPoolConfig.setMaxTotal(maxActive);
-        genericObjectPoolConfig.setMaxWaitMillis(maxWait);
+        genericObjectPoolConfig.setMaxWait(Duration.ofMillis(maxWait));
         genericObjectPoolConfig.setTestOnBorrow(true);
         genericObjectPoolConfig.setTestWhileIdle(true);
 
@@ -109,14 +118,11 @@ public class RedisConfiguration extends CachingConfigurerSupport {
         ObjectMapper om = new ObjectMapper();
         om.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
         om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
-        om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
-        // 支持 jdk 1.8 日期
-        om.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+        om.activateDefaultTyping(LaissezFaireSubTypeValidator.instance, ObjectMapper.DefaultTyping.NON_FINAL);
         om.registerModule(new Jdk8Module())
                 .registerModule(new JavaTimeModule())
                 .registerModule(new ParameterNamesModule());
-        GenericJackson2JsonRedisSerializer  genericJackson2JsonRedisSerializer = new GenericJackson2JsonRedisSerializer(om);
-        return genericJackson2JsonRedisSerializer;
+        return new GenericJackson2JsonRedisSerializer(om);
     }
 
     @Bean
@@ -136,35 +142,27 @@ public class RedisConfiguration extends CachingConfigurerSupport {
         return redisTemplate;
     }
 
-
-
-    // 缓存管理器
     @Bean
     @Override
     public CacheManager cacheManager() {
 
-        // 设置序列化
         RedisSerializer<String> stringSerializer = new StringRedisSerializer();
-        Jackson2JsonRedisSerializer<Object> jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer<Object>(Object.class);
 
-        //解决查询缓存转换异常的问题
         ObjectMapper om = new ObjectMapper();
         om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
-        om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
-        // 支持 jdk 1.8 日期
-        om.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-        om.registerModule(new JavaTimeModule());
+        om.activateDefaultTyping(LaissezFaireSubTypeValidator.instance, ObjectMapper.DefaultTyping.NON_FINAL);
         om.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
         om.registerModule(new Jdk8Module())
                 .registerModule(new JavaTimeModule())
                 .registerModule(new ParameterNamesModule());
-        jackson2JsonRedisSerializer.setObjectMapper(om);
+
+        Jackson2JsonRedisSerializer<Object> jackson2JsonRedisSerializer =
+                new Jackson2JsonRedisSerializer<>(om, Object.class);
 
         RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig()
                 .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(stringSerializer))
                 .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(jackson2JsonRedisSerializer))
                 .disableCachingNullValues()
-                // 缓存过期时间
                 .entryTtl(Duration.ofDays(1));
 
         RedisCacheManager.RedisCacheManagerBuilder builder = RedisCacheManager.RedisCacheManagerBuilder

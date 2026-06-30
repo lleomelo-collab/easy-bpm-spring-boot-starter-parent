@@ -19,15 +19,15 @@ import com.pig.easy.bpm.common.utils.Result;
 import com.pig.easy.bpm.web.vo.request.DeptQueryVO;
 import com.pig.easy.bpm.web.vo.request.DeptSaveOrUpdateVO;
 import com.pig.easy.bpm.web.vo.request.OrganDeptQueryVO;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.List;
@@ -48,7 +48,7 @@ public class DeptController extends BaseController {
     @Autowired
     DeptService service;
 
-    @ApiOperation(value = "查询部门表列表", notes = "查询部门表列表", produces = "application/json")
+    @Operation(summary = "查询部门表列表", description = "查询部门表列表")
     @PostMapping("/getListPage")
     public JsonResult getListPage(@Valid @RequestBody DeptQueryVO param) {
 
@@ -62,7 +62,7 @@ public class DeptController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "查询部门表列表", notes = "查询部门表列表", produces = "application/json")
+    @Operation(summary = "查询部门表列表", description = "查询部门表列表")
     @PostMapping("/getList")
     public JsonResult getList(@Valid @RequestBody DeptQueryVO param) {
 
@@ -76,7 +76,7 @@ public class DeptController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "新增部门表", notes = "新增部门表", produces = "application/json")
+    @Operation(summary = "新增部门表", description = "新增部门表")
     @PostMapping("/insert")
     public JsonResult insertDept(@Valid @RequestBody DeptSaveOrUpdateVO param) {
 
@@ -90,7 +90,7 @@ public class DeptController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "修改部门表", notes = "修改部门表", produces = "application/json")
+    @Operation(summary = "修改部门表", description = "修改部门表")
     @PostMapping("/update")
     public JsonResult updateDept(@Valid @RequestBody DeptSaveOrUpdateVO param) {
 
@@ -104,7 +104,7 @@ public class DeptController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "删除部门表", notes = "删除部门表", produces = "application/json")
+    @Operation(summary = "删除部门表", description = "删除部门表")
     @PostMapping("/deleteById")
     public JsonResult deleteById(@Valid @RequestBody DeptSaveOrUpdateVO param) {
 
@@ -119,7 +119,7 @@ public class DeptController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "下载部门表", notes = "下载部门表", produces = "application/json")
+    @Operation(summary = "下载部门表", description = "下载部门表")
     @PostMapping("download")
     public void download(HttpServletResponse response,@Valid @RequestBody DeptQueryVO param) throws IOException {
 
@@ -134,7 +134,7 @@ public class DeptController extends BaseController {
         EasyExcel.write(response.getOutputStream(), DeptExportDTO.class).registerConverter(new LocalDateTimeConverter()).sheet().doWrite(result.getData());
     }
 
-    @ApiOperation(value = "根据编号获取部门表", notes = "根据编号获取部门表", produces = "application/json")
+    @Operation(summary = "根据编号获取部门表", description = "根据编号获取部门表")
     @PostMapping("/getById")
     public JsonResult getById(@Valid @RequestBody DeptSaveOrUpdateVO param) {
 
@@ -148,7 +148,7 @@ public class DeptController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "获取机构部门树", notes = "获取机构部门树", produces = "application/json")
+    @Operation(summary = "获取机构部门树", description = "获取机构部门树")
     @PostMapping("/getOrganDeptTree")
     public JsonResult getOrganUserTree(@RequestBody @Valid OrganDeptQueryVO organDeptQueryVO) {
 

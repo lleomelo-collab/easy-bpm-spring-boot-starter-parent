@@ -18,13 +18,13 @@ import com.pig.easy.bpm.common.utils.JsonResult;
 import com.pig.easy.bpm.common.utils.Result;
 import com.pig.easy.bpm.web.vo.request.ProcessQueryVO;
 import com.pig.easy.bpm.web.vo.request.ProcessSaveOrUpdateVO;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.List;
@@ -45,7 +45,7 @@ public class ProcessController {
     @Autowired
     ProcessService service;
 
-    @ApiOperation(value = "查询流程表列表", notes = "查询流程表列表", produces = "application/json")
+    @Operation(summary = "查询流程表列表", description = "查询流程表列表")
     @PostMapping("/getListPage")
     public JsonResult getListPage(@Valid @RequestBody ProcessQueryVO param) {
 
@@ -59,7 +59,7 @@ public class ProcessController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "查询流程表列表", notes = "查询流程表列表", produces = "application/json")
+    @Operation(summary = "查询流程表列表", description = "查询流程表列表")
     @PostMapping("/getList")
     public JsonResult getList(@Valid @RequestBody ProcessQueryVO param) {
 
@@ -73,7 +73,7 @@ public class ProcessController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "新增流程表", notes = "新增流程表", produces = "application/json")
+    @Operation(summary = "新增流程表", description = "新增流程表")
     @PostMapping("/insert")
     public JsonResult insertProcess(@Valid @RequestBody ProcessSaveOrUpdateVO param) {
 
@@ -87,7 +87,7 @@ public class ProcessController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "修改流程表", notes = "修改流程表", produces = "application/json")
+    @Operation(summary = "修改流程表", description = "修改流程表")
     @PostMapping("/update")
     public JsonResult updateProcess(@Valid @RequestBody ProcessSaveOrUpdateVO param) {
 
@@ -101,7 +101,7 @@ public class ProcessController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "删除流程表", notes = "删除流程表", produces = "application/json")
+    @Operation(summary = "删除流程表", description = "删除流程表")
     @PostMapping("/deleteById")
     public JsonResult deleteById(@Valid @RequestBody ProcessSaveOrUpdateVO param) {
 
@@ -116,7 +116,7 @@ public class ProcessController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "下载流程表", notes = "下载流程表", produces = "application/json")
+    @Operation(summary = "下载流程表", description = "下载流程表")
     @PostMapping("download")
     public void download(HttpServletResponse response,@Valid @RequestBody ProcessQueryVO param) throws IOException {
 
@@ -131,7 +131,7 @@ public class ProcessController {
         EasyExcel.write(response.getOutputStream(), ProcessExportDTO.class).registerConverter(new LocalDateTimeConverter()).sheet().doWrite(result.getData());
     }
 
-    @ApiOperation(value = "根据编号获取流程表", notes = "根据编号获取流程表", produces = "application/json")
+    @Operation(summary = "根据编号获取流程表", description = "根据编号获取流程表")
     @PostMapping("/getById")
     public JsonResult getById(@Valid @RequestBody ProcessSaveOrUpdateVO param) {
 
@@ -145,9 +145,9 @@ public class ProcessController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "根据流程编号获取流程详细信息", notes = "获取流程", produces = "application/json")
+    @Operation(summary = "根据流程编号获取流程详细信息", description = "获取流程")
     @PostMapping("/getProcessById/{processId}")
-    public JsonResult getProcessById(@ApiParam(required = true, name = "流程编号", value = "processId", example = "1") @PathVariable("processId") Long processId) {
+    public JsonResult getProcessById(@Parameter(required = true, name = "processId", description = "流程编号", example = "1") @PathVariable("processId") Long processId) {
 
         Result<ProcessDTO> result = service.getProcessById(processId);
         if (result.getEntityError().getCode() != EntityError.SUCCESS.getCode()) {
@@ -156,9 +156,9 @@ public class ProcessController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "根据流程KEY获取流程详细信息", notes = "获取流程", produces = "application/json")
+    @Operation(summary = "根据流程KEY获取流程详细信息", description = "获取流程")
     @PostMapping("/getProcessByKey/{processKey}")
-    public JsonResult getProcessByKey(@ApiParam(required = true, name = "流程编号", value = "processKey", example = "pig:processKey") @PathVariable("processKey") String processKey) {
+    public JsonResult getProcessByKey(@Parameter(required = true, name = "processKey", description = "流程编号", example = "pig:processKey") @PathVariable("processKey") String processKey) {
 
         Result<ProcessDTO> result = service.getProcessByProcessKey(processKey);
         if (result.getEntityError().getCode() != EntityError.SUCCESS.getCode()) {
@@ -167,9 +167,9 @@ public class ProcessController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "初始化发起流程表单数据", notes = "初始化发起流程表单数据",  produces = "application/json")
+    @Operation(summary = "初始化发起流程表单数据", description = "初始化发起流程表单数据")
     @PostMapping("/getInitStartFormData/{processKey}")
-    public JsonResult getInitStartFormData(@ApiParam(required = true, name = "流程编号", value = "processKey", example = "pig:processKey") @PathVariable("processKey") String processKey) {
+    public JsonResult getInitStartFormData(@Parameter(required = true, name = "processKey", description = "流程编号", example = "pig:processKey") @PathVariable("processKey") String processKey) {
 
         Result<DynamicFormDataDTO> result = service.getInitStartFormData(processKey);
         if (result.getEntityError().getCode() != EntityError.SUCCESS.getCode()) {

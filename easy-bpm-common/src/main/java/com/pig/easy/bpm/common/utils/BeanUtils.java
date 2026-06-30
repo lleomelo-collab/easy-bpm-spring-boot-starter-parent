@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.toolkit.ClassUtils;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import lombok.extern.slf4j.Slf4j;
-import net.sf.cglib.beans.BeanMap;
+import org.springframework.cglib.beans.BeanMap;
 import org.apache.commons.lang.StringUtils;
 
 import java.lang.reflect.Method;

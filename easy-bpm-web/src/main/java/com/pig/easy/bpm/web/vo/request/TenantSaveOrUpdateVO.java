@@ -1,7 +1,7 @@
 package com.pig.easy.bpm.web.vo.request;
 
 
-import io.swagger.annotations.ApiModel;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 
-@ApiModel(value = "Tenant对象", description = "租户表")
+@Schema(name = "Tenant对象", description = "租户表")
 public class TenantSaveOrUpdateVO implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -151,7 +151,7 @@ public class VariableDictDO extends Model<VariableDictDO> {
 
 
     @Override
-    protected Serializable pkVal() {
+    public Serializable pkVal() {
         return this.variableId;
     }
 

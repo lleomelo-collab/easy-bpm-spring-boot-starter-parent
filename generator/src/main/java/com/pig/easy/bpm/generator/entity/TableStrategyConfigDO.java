@@ -189,7 +189,7 @@ public class TableStrategyConfigDO extends Model<TableStrategyConfigDO> {
 
 
     @Override
-    protected Serializable pkVal() {
+    public Serializable pkVal() {
         return this.configId;
     }
 

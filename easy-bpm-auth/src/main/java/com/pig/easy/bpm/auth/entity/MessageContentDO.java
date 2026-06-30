@@ -145,7 +145,7 @@ public class MessageContentDO extends Model<MessageContentDO> {
 
 
     @Override
-    protected Serializable pkVal() {
+    public Serializable pkVal() {
         return this.contentId;
     }
 

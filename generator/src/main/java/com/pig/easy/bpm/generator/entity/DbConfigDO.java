@@ -114,7 +114,7 @@ public class DbConfigDO extends Model<DbConfigDO> {
 
 
     @Override
-    protected Serializable pkVal() {
+    public Serializable pkVal() {
         return this.dbId;
     }
 

@@ -219,7 +219,7 @@ public class ColumnDO extends Model<ColumnDO> {
 
 
     @Override
-    protected Serializable pkVal() {
+    public Serializable pkVal() {
         return this.columnId;
     }
 

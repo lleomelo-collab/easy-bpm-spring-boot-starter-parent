@@ -16,15 +16,15 @@ import com.pig.easy.bpm.generator.dto.response.DbConfigExportDTO;
 import com.pig.easy.bpm.generator.service.DbConfigService;
 import com.pig.easy.bpm.generator.vo.request.DbConfigQueryVO;
 import com.pig.easy.bpm.generator.vo.request.DbConfigSaveOrUpdateVO;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.List;
@@ -45,7 +45,7 @@ public class DbConfigController {
     @Autowired
     DbConfigService service;
 
-    @ApiOperation(value = "查询数据源表列表", notes = "查询数据源表列表", produces = "application/json")
+    @Operation(summary = "查询数据源表列表", description = "查询数据源表列表")
     @PostMapping("/getListPage")
     public JsonResult getListPage(@Valid @RequestBody DbConfigQueryVO param) {
 
@@ -59,7 +59,7 @@ public class DbConfigController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "查询数据源表列表", notes = "查询数据源表列表", produces = "application/json")
+    @Operation(summary = "查询数据源表列表", description = "查询数据源表列表")
     @PostMapping("/getList")
     public JsonResult getList(@Valid @RequestBody DbConfigQueryVO param) {
 
@@ -73,7 +73,7 @@ public class DbConfigController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "新增数据源表", notes = "新增数据源表", produces = "application/json")
+    @Operation(summary = "新增数据源表", description = "新增数据源表")
     @PostMapping("/insert")
     public JsonResult insertDbConfig(@Valid @RequestBody DbConfigSaveOrUpdateVO param) {
 
@@ -87,7 +87,7 @@ public class DbConfigController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "修改数据源表", notes = "修改数据源表", produces = "application/json")
+    @Operation(summary = "修改数据源表", description = "修改数据源表")
     @PostMapping("/update")
     public JsonResult updateDbConfig(@Valid @RequestBody DbConfigSaveOrUpdateVO param) {
 
@@ -101,7 +101,7 @@ public class DbConfigController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "删除数据源表", notes = "删除数据源表", produces = "application/json")
+    @Operation(summary = "删除数据源表", description = "删除数据源表")
     @PostMapping("/deleteById")
     public JsonResult deleteById(@Valid @RequestBody DbConfigSaveOrUpdateVO param) {
 
@@ -116,7 +116,7 @@ public class DbConfigController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "下载数据源表", notes = "下载数据源表", produces = "application/json")
+    @Operation(summary = "下载数据源表", description = "下载数据源表")
     @PostMapping("download")
     public void download(HttpServletResponse response,@Valid @RequestBody DbConfigQueryVO param) throws IOException {
 
@@ -131,7 +131,7 @@ public class DbConfigController {
         EasyExcel.write(response.getOutputStream(), DbConfigExportDTO.class).registerConverter(new LocalDateTimeConverter()).sheet().doWrite(result.getData());
     }
 
-    @ApiOperation(value = "根据编号获取数据源表", notes = "根据编号获取数据源表", produces = "application/json")
+    @Operation(summary = "根据编号获取数据源表", description = "根据编号获取数据源表")
     @PostMapping("/getById")
     public JsonResult getById(@Valid @RequestBody DbConfigSaveOrUpdateVO param) {
 

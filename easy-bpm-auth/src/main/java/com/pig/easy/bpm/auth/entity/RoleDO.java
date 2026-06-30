@@ -121,7 +121,7 @@ public class RoleDO extends Model<RoleDO> {
 
 
     @Override
-    protected Serializable pkVal() {
+    public Serializable pkVal() {
         return this.roleId;
     }
 

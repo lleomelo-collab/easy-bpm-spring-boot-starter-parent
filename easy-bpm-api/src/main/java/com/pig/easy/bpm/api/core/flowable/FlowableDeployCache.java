@@ -55,6 +55,16 @@ public class FlowableDeployCache implements DeploymentCache<ProcessDefinitionCac
         cachesLocal.clear();
     }
 
+    @Override
+    public int size() {
+        return cachesLocal.size();
+    }
+
+    @Override
+    public java.util.Collection<ProcessDefinitionCacheEntry> getAll() {
+        return cachesLocal.values();
+    }
+
     /**
      * 对象转byte
      *

@@ -8,18 +8,18 @@ import com.pig.easy.bpm.common.constant.Constants;
 import com.pig.easy.bpm.common.entityError.EntityError;
 import com.pig.easy.bpm.common.utils.JsonResult;
 import com.pig.easy.bpm.common.utils.id.IdUtils;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.FastByteArrayOutputStream;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import sun.misc.BASE64Encoder;
+import java.util.Base64;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import javax.imageio.ImageIO;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.HashMap;
@@ -54,7 +54,7 @@ public class CaptchaController extends BaseController {
     /**
      * 生成验证码
      */
-    @ApiOperation(value = "新增", notes = "新增", produces = "application/json")
+    @Operation(summary = "新增", description = "新增")
     @GetMapping("/captchaImage")
     public JsonResult getCode(HttpServletResponse response) throws IOException {
         String uuid = IdUtils.simpleUUID();
@@ -84,7 +84,7 @@ public class CaptchaController extends BaseController {
 
         Map<String, Object> result = new HashMap<>();
         result.put("uuid", uuid);
-        result.put("img", new BASE64Encoder().encode(os.toByteArray()));
+        result.put("img", Base64.getEncoder().encodeToString(os.toByteArray()));
         return JsonResult.success(result);
     }
 }

@@ -121,7 +121,7 @@ public class ProcessRuleDO extends Model<ProcessRuleDO> {
 
 
     @Override
-    protected Serializable pkVal() {
+    public Serializable pkVal() {
         return this.ruleId;
     }
 

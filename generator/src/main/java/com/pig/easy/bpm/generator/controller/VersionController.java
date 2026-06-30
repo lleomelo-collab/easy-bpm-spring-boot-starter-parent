@@ -16,15 +16,15 @@ import com.pig.easy.bpm.generator.dto.response.VersionExportDTO;
 import com.pig.easy.bpm.generator.service.VersionService;
 import com.pig.easy.bpm.generator.vo.request.VersionQueryVO;
 import com.pig.easy.bpm.generator.vo.request.VersionSaveOrUpdateVO;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.List;
@@ -45,7 +45,7 @@ public class VersionController {
     @Autowired
     VersionService service;
 
-    @ApiOperation(value = "查询版本表列表", notes = "查询版本表列表", produces = "application/json")
+    @Operation(summary = "查询版本表列表", description = "查询版本表列表")
     @PostMapping("/getListPage")
     public JsonResult getListPage(@Valid @RequestBody VersionQueryVO param) {
 
@@ -59,7 +59,7 @@ public class VersionController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "查询版本表列表", notes = "查询版本表列表", produces = "application/json")
+    @Operation(summary = "查询版本表列表", description = "查询版本表列表")
     @PostMapping("/getList")
     public JsonResult getList(@Valid @RequestBody VersionQueryVO param) {
 
@@ -73,7 +73,7 @@ public class VersionController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "新增版本表", notes = "新增版本表", produces = "application/json")
+    @Operation(summary = "新增版本表", description = "新增版本表")
     @PostMapping("/insert")
     public JsonResult insertVersion(@Valid @RequestBody VersionSaveOrUpdateVO param) {
 
@@ -87,7 +87,7 @@ public class VersionController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "修改版本表", notes = "修改版本表", produces = "application/json")
+    @Operation(summary = "修改版本表", description = "修改版本表")
     @PostMapping("/update")
     public JsonResult updateVersion(@Valid @RequestBody VersionSaveOrUpdateVO param) {
 
@@ -101,7 +101,7 @@ public class VersionController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "删除版本表", notes = "删除版本表", produces = "application/json")
+    @Operation(summary = "删除版本表", description = "删除版本表")
     @PostMapping("/deleteById")
     public JsonResult deleteById(@Valid @RequestBody VersionSaveOrUpdateVO param) {
 
@@ -116,7 +116,7 @@ public class VersionController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "下载版本表", notes = "下载版本表", produces = "application/json")
+    @Operation(summary = "下载版本表", description = "下载版本表")
     @PostMapping("download")
     public void download(HttpServletResponse response,@Valid @RequestBody VersionQueryVO param) throws IOException {
 
@@ -131,7 +131,7 @@ public class VersionController {
         EasyExcel.write(response.getOutputStream(), VersionExportDTO.class).registerConverter(new LocalDateTimeConverter()).sheet().doWrite(result.getData());
     }
 
-    @ApiOperation(value = "根据编号获取版本表", notes = "根据编号获取版本表", produces = "application/json")
+    @Operation(summary = "根据编号获取版本表", description = "根据编号获取版本表")
     @PostMapping("/getById")
     public JsonResult getById(@Valid @RequestBody VersionSaveOrUpdateVO param) {
 

@@ -133,7 +133,7 @@ public class CompanyDO extends Model<CompanyDO> {
 
 
     @Override
-    protected Serializable pkVal() {
+    public Serializable pkVal() {
         return this.companyId;
     }
 

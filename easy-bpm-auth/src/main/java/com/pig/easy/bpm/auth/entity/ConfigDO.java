@@ -115,7 +115,7 @@ public class ConfigDO extends Model<ConfigDO> {
 
 
     @Override
-    protected Serializable pkVal() {
+    public Serializable pkVal() {
         return this.configId;
     }
 

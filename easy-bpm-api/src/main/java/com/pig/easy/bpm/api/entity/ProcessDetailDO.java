@@ -113,7 +113,7 @@ public class ProcessDetailDO extends Model<ProcessDetailDO> {
 
 
     @Override
-    protected Serializable pkVal() {
+    public Serializable pkVal() {
         return this.processDetailId;
     }
 

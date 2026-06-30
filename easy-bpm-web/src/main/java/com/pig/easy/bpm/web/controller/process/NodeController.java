@@ -8,9 +8,9 @@ import com.pig.easy.bpm.api.dto.request.*;
 import com.pig.easy.bpm.api.dto.response.*;
 import org.springframework.web.bind.annotation.*;
 import com.pig.easy.bpm.api.service.NodeService;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import com.github.pagehelper.PageInfo;
 import com.pig.easy.bpm.common.entityError.EntityError;
 import com.pig.easy.bpm.common.utils.BeanUtils;
@@ -21,7 +21,7 @@ import com.pig.easy.bpm.common.converter.LocalDateTimeConverter;
 import java.io.IOException;
 import com.alibaba.excel.EasyExcel;
 
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
 
 import java.net.URLEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +45,7 @@ public class NodeController {
     @Autowired
     NodeService service;
 
-    @ApiOperation(value = "查询流程节点表列表", notes = "查询流程节点表列表", produces = "application/json")
+    @Operation(summary = "查询流程节点表列表", description = "查询流程节点表列表")
     @PostMapping("/getListPage")
     public JsonResult getListPage(@Valid @RequestBody NodeQueryVO param) {
 
@@ -59,7 +59,7 @@ public class NodeController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "查询流程节点表列表", notes = "查询流程节点表列表", produces = "application/json")
+    @Operation(summary = "查询流程节点表列表", description = "查询流程节点表列表")
     @PostMapping("/getList")
     public JsonResult getList(@Valid @RequestBody NodeQueryVO param) {
 
@@ -73,7 +73,7 @@ public class NodeController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "新增流程节点表", notes = "新增流程节点表", produces = "application/json")
+    @Operation(summary = "新增流程节点表", description = "新增流程节点表")
     @PostMapping("/insert")
     public JsonResult insertNode(@Valid @RequestBody NodeSaveOrUpdateVO param) {
 
@@ -87,7 +87,7 @@ public class NodeController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "修改流程节点表", notes = "修改流程节点表", produces = "application/json")
+    @Operation(summary = "修改流程节点表", description = "修改流程节点表")
     @PostMapping("/update")
     public JsonResult updateNode(@Valid @RequestBody NodeSaveOrUpdateVO param) {
 
@@ -101,7 +101,7 @@ public class NodeController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "删除流程节点表", notes = "删除流程节点表", produces = "application/json")
+    @Operation(summary = "删除流程节点表", description = "删除流程节点表")
     @PostMapping("/deleteById")
     public JsonResult deleteById(@Valid @RequestBody NodeSaveOrUpdateVO param) {
 
@@ -116,7 +116,7 @@ public class NodeController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "下载流程节点表", notes = "下载流程节点表", produces = "application/json")
+    @Operation(summary = "下载流程节点表", description = "下载流程节点表")
     @PostMapping("download")
     public void download(HttpServletResponse response,@Valid @RequestBody NodeQueryVO param) throws IOException {
 
@@ -131,7 +131,7 @@ public class NodeController {
         EasyExcel.write(response.getOutputStream(), NodeExportDTO.class).registerConverter(new LocalDateTimeConverter()).sheet().doWrite(result.getData());
     }
 
-    @ApiOperation(value = "根据编号获取流程节点表", notes = "根据编号获取流程节点表", produces = "application/json")
+    @Operation(summary = "根据编号获取流程节点表", description = "根据编号获取流程节点表")
     @PostMapping("/getById")
     public JsonResult getById(@Valid @RequestBody NodeSaveOrUpdateVO param) {
 

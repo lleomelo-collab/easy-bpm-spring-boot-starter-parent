@@ -180,7 +180,7 @@ public class FormDataDO extends Model<FormDataDO> {
 
 
     @Override
-    protected Serializable pkVal() {
+    public Serializable pkVal() {
         return this.dataId;
     }
 

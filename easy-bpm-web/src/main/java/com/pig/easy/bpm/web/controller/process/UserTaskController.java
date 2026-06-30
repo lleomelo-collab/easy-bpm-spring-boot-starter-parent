@@ -13,16 +13,16 @@ import com.pig.easy.bpm.common.utils.Result;
 import com.pig.easy.bpm.web.vo.request.BatchCompleteTaskVO;
 import com.pig.easy.bpm.web.vo.request.CompleteTaskVO;
 import com.pig.easy.bpm.web.vo.request.UserTaskQueryVO;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
-import javax.validation.Valid;
+import jakarta.annotation.Resource;
+import jakarta.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
@@ -36,13 +36,13 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/userTask")
-@Api(tags = "用户任务管理", value = "用户任务管理")
+@Tag(name = "用户任务管理")
 public class UserTaskController extends BaseController {
 
     @Resource
     UserTaskService userTaskService;
 
-    @ApiOperation(value = "获取草稿列表", notes = "获取草稿列表")
+    @Operation(summary = "获取草稿列表", description = "获取草稿列表")
     @RequestMapping("/getDraftListByCondition")
     public JsonResult getDraftListByCondition(@RequestBody @Valid UserTaskQueryVO userTaskQueryVO) {
 
@@ -59,7 +59,7 @@ public class UserTaskController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "获取申请列表", notes = "获取申请列表")
+    @Operation(summary = "获取申请列表", description = "获取申请列表")
     @RequestMapping("/getApplyListByCondition")
     public JsonResult getApplyListByCondition(@RequestBody @Valid UserTaskQueryVO userTaskQueryVO) {
 
@@ -76,7 +76,7 @@ public class UserTaskController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "获取已办列表", notes = "获取已办列表")
+    @Operation(summary = "获取已办列表", description = "获取已办列表")
     @RequestMapping("/getHaveDoListByCondition")
     public JsonResult getHaveDoListByCondition(@RequestBody @Valid UserTaskQueryVO userTaskQueryVO) {
 
@@ -93,7 +93,7 @@ public class UserTaskController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "获取待办列表", notes = "获取待办列表")
+    @Operation(summary = "获取待办列表", description = "获取待办列表")
     @RequestMapping("/getToDoListByCondition")
     public JsonResult getToDoListByCondition(@RequestBody @Valid UserTaskQueryVO userTaskQueryVO) {
 
@@ -110,7 +110,7 @@ public class UserTaskController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "完成任务", notes = "完成任务")
+    @Operation(summary = "完成任务", description = "完成任务")
     @RequestMapping("/completeTask")
     public JsonResult completeTask(@RequestBody @Valid CompleteTaskVO completeTaskVO) {
 
@@ -129,7 +129,7 @@ public class UserTaskController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "批量审批任务", notes = "批量审批任务")
+    @Operation(summary = "批量审批任务", description = "批量审批任务")
     @RequestMapping("/batchCompleteTask")
     public JsonResult batchCompleteTask(@RequestBody @Valid BatchCompleteTaskVO BatchCompleteTaskVO) {
 
@@ -148,9 +148,9 @@ public class UserTaskController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "获取可退回节点", notes = "获取可退回节点")
+    @Operation(summary = "获取可退回节点", description = "获取可退回节点")
     @RequestMapping("/getReturnNode/{taskId}")
-    public JsonResult getReturnNode(@ApiParam(required = true, name = "任务编号", value = "taskId", example = "1") @PathVariable("taskId") Long taskId) {
+    public JsonResult getReturnNode(@Parameter(required = true, name = "taskId", description = "任务编号", example = "1") @PathVariable("taskId") Long taskId) {
 
         Result<List<ReturnNodeDTO>> result = userTaskService.getReturnNode(taskId);
         if (result.getEntityError().getCode() != EntityError.SUCCESS.getCode()) {
@@ -159,9 +159,9 @@ public class UserTaskController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "获取自由跳转节点", notes = "获取自由跳转节点")
+    @Operation(summary = "获取自由跳转节点", description = "获取自由跳转节点")
     @RequestMapping("/getRandomJumpNode/{taskId}")
-    public JsonResult getRandomJumpNode(@ApiParam(required = true, name = "任务编号", value = "taskId", example = "1") @PathVariable("taskId") Long taskId) {
+    public JsonResult getRandomJumpNode(@Parameter(required = true, name = "taskId", description = "任务编号", example = "1") @PathVariable("taskId") Long taskId) {
 
         Result<List<ReturnNodeDTO>> result = userTaskService.getRandomJumpNode(taskId);
         if (result.getEntityError().getCode() != EntityError.SUCCESS.getCode()) {
@@ -170,10 +170,10 @@ public class UserTaskController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "获取已办/待办/已发/草稿 数量", notes = "获取已办/待办/已发/草稿 数量")
+    @Operation(summary = "获取已办/待办/已发/草稿 数量", description = "获取已办/待办/已发/草稿 数量")
     @RequestMapping("/getCountListByUserType/{tenantId}/{userType}")
-    public JsonResult getCountListByUserType(@ApiParam(required = true, name = "租户编号", value = "tenantId", example = "pig") @PathVariable("tenantId") String tenantId,
-                                             @ApiParam(required = true, name = "查询类型 all：所有， apply：申请,toDo ： 待办,haveDo：已办,draft：草稿", value = "userType", example = "1") @PathVariable("userType") String userType) {
+    public JsonResult getCountListByUserType(@Parameter(required = true, name = "tenantId", description = "租户编号", example = "pig") @PathVariable("tenantId") String tenantId,
+                                             @Parameter(required = true, name = "userType", description = "查询类型 all：所有， apply：申请,toDo ： 待办,haveDo：已办,draft：草稿", example = "1") @PathVariable("userType") String userType) {
 
         Result<Map<String, Object>> result = userTaskService.getCountListByUserType(currentUserInfo().getUserId(), tenantId, userType);
         if (result.getEntityError().getCode() != EntityError.SUCCESS.getCode()) {

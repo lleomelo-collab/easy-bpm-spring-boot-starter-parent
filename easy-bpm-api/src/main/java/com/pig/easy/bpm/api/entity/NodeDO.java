@@ -266,7 +266,7 @@ public class NodeDO extends Model<NodeDO> {
 
 
     @Override
-    protected Serializable pkVal() {
+    public Serializable pkVal() {
         return this.id;
     }
 

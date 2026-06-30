@@ -175,7 +175,7 @@ public class OperatorLogDO extends Model<OperatorLogDO> {
 
 
     @Override
-    protected Serializable pkVal() {
+    public Serializable pkVal() {
         return this.logId;
     }
 
