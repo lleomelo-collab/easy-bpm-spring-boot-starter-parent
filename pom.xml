@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.3.5</version>
+        <version>3.5.16</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.pig.easy.bpm</groupId>
@@ -54,40 +54,40 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <fastjson.version>1.2.83</fastjson.version>
-        <spring.boot.version>3.3.5</spring.boot.version>
+        <spring.boot.version>3.5.16</spring.boot.version>
         <spring-context-support.version>1.0.6</spring-context-support.version>
 
-        <jedis.version>5.1.0</jedis.version>
+        <jedis.version>5.2.0</jedis.version>
 
-        <druid.version>1.2.21</druid.version>
-        <mysql.version>8.0.33</mysql.version>
-        <mybatis-plus-generate.version>3.5.5</mybatis-plus-generate.version>
-        <mybatis-plus-boot-starter.version>3.5.5</mybatis-plus-boot-starter.version>
+        <druid.version>1.2.28</druid.version>
+        <mysql.version>8.3.0</mysql.version>
+        <mybatis-plus-generate.version>3.5.16</mybatis-plus-generate.version>
+        <mybatis-plus-boot-starter.version>3.5.16</mybatis-plus-boot-starter.version>
         <mybatis-typehandlers-jsr310.version>1.0.2</mybatis-typehandlers-jsr310.version>
 
-        <io.netty.version>4.1.104.Final</io.netty.version>
+        <io.netty.version>4.1.116.Final</io.netty.version>
         <pagehelper.version>2.1.0</pagehelper.version>
         <juel.version>2.1.0</juel.version>
-        <flowable.version>7.0.1</flowable.version>
+        <flowable.version>7.2.0</flowable.version>
 
         <velocity.version>1.7</velocity.version>
         <java-jwt.version>4.4.0</java-jwt.version>
-        <commons-lang3.version>3.14.0</commons-lang3.version>
+        <commons-lang3.version>3.17.0</commons-lang3.version>
         <commons-lang.version>2.6</commons-lang.version>
         <transmittable-thread-local>2.14.4</transmittable-thread-local>
-        <springdoc.version>2.3.0</springdoc.version>
+        <springdoc.version>2.8.17</springdoc.version>
         <commons-beanutils.version>1.9.4</commons-beanutils.version>
         <!--<sharding-jdbc.version>4.0.0</sharding-jdbc.version>-->
-        <freemarker.version>2.3.32</freemarker.version>
+        <freemarker.version>2.3.33</freemarker.version>
 
-        <oshi.version>6.4.8</oshi.version>
+        <oshi.version>6.6.5</oshi.version>
         <jna.version>5.14.0</jna.version>
 
         <groovy-all.version>3.0.7</groovy-all.version>
 
-        <commons.io.version>2.15.1</commons.io.version>
+        <commons.io.version>2.18.0</commons.io.version>
         <commons.fileupload.version>1.5</commons.fileupload.version>
-        <easyexcel.version>3.3.3</easyexcel.version>
+        <easyexcel.version>4.0.3</easyexcel.version>
         <kaptcha.version>2.3.2</kaptcha.version>
         <bitwalker.version>1.21</bitwalker.version>
         <skipTests>true</skipTests>
@@ -294,6 +294,18 @@
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
+                <version>${mybatis-plus-boot-starter.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-spring</artifactId>
+                <version>${mybatis-plus-boot-starter.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-jsqlparser</artifactId>
                 <version>${mybatis-plus-boot-starter.version}</version>
             </dependency>
 

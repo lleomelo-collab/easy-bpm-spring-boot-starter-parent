@@ -183,13 +183,13 @@ public class EnvUtil {
     
     @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
     public static float getCPU() {
-        return (float) OPERATING_SYSTEM_MX_BEAN.getSystemCpuLoad();
+        return (float) OPERATING_SYSTEM_MX_BEAN.getCpuLoad();
     }
     
     public static float getMem() {
         return (float) (1
-                - (double) OPERATING_SYSTEM_MX_BEAN.getFreePhysicalMemorySize() / (double) OPERATING_SYSTEM_MX_BEAN
-                .getTotalPhysicalMemorySize());
+                - (double) OPERATING_SYSTEM_MX_BEAN.getFreeMemorySize() / (double) OPERATING_SYSTEM_MX_BEAN
+                .getTotalMemorySize());
     }
 
     public static Resource getDefaultApplicatioResource() {
