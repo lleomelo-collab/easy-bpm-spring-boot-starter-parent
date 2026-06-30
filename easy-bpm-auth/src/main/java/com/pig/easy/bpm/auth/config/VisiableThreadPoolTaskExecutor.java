@@ -3,9 +3,9 @@ package com.pig.easy.bpm.auth.config;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
-import org.springframework.util.concurrent.ListenableFuture;
 
 import java.util.concurrent.Callable;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Future;
 import java.util.concurrent.ThreadPoolExecutor;
 
@@ -61,14 +61,14 @@ public class VisiableThreadPoolTaskExecutor extends ThreadPoolTaskExecutor {
     }
 
     @Override
-    public ListenableFuture<?> submitListenable(Runnable task) {
-        showThreadPoolInfo("1. do submitListenable");
-        return super.submitListenable(task);
+    public CompletableFuture<Void> submitCompletable(Runnable task) {
+        showThreadPoolInfo("1. do submitCompletable");
+        return super.submitCompletable(task);
     }
 
     @Override
-    public <T> ListenableFuture<T> submitListenable(Callable<T> task) {
-        showThreadPoolInfo("2. do submitListenable");
-        return super.submitListenable(task);
+    public <T> CompletableFuture<T> submitCompletable(Callable<T> task) {
+        showThreadPoolInfo("2. do submitCompletable");
+        return super.submitCompletable(task);
     }
 }
