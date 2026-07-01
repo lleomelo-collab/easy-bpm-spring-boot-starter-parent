@@ -17,15 +17,15 @@ import com.pig.easy.bpm.common.utils.BeanUtils;
 import com.pig.easy.bpm.common.utils.EasyBpmAsset;
 import com.pig.easy.bpm.common.utils.JsonResult;
 import com.pig.easy.bpm.common.utils.Result;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.List;
@@ -46,7 +46,7 @@ public class SqlLogController extends BaseController {
     @Autowired
     SqlLogService service;
 
-    @ApiOperation(value = "查询SQL日志表列表", notes = "查询SQL日志表列表", produces = "application/json")
+    @Operation(summary = "查询SQL日志表列表")
     @PostMapping("/getListPage")
     public JsonResult getListPage(@Valid @RequestBody SqlLogQueryVO param) {
 
@@ -60,7 +60,7 @@ public class SqlLogController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "查询SQL日志表列表", notes = "查询SQL日志表列表", produces = "application/json")
+    @Operation(summary = "查询SQL日志表列表")
     @PostMapping("/getList")
     public JsonResult getList(@Valid @RequestBody SqlLogQueryVO param) {
 
@@ -74,7 +74,7 @@ public class SqlLogController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "新增SQL日志表", notes = "新增SQL日志表", produces = "application/json")
+    @Operation(summary = "新增SQL日志表")
     @PostMapping("/insert")
     public JsonResult insertSqlLog(@Valid @RequestBody SqlLogSaveOrUpdateVO param) {
 
@@ -88,7 +88,7 @@ public class SqlLogController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "修改SQL日志表", notes = "修改SQL日志表", produces = "application/json")
+    @Operation(summary = "修改SQL日志表")
     @PostMapping("/update")
     public JsonResult updateSqlLog(@Valid @RequestBody SqlLogSaveOrUpdateVO param) {
 
@@ -102,7 +102,7 @@ public class SqlLogController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "删除SQL日志表", notes = "删除SQL日志表", produces = "application/json")
+    @Operation(summary = "删除SQL日志表")
     @PostMapping("/deleteById")
     public JsonResult deleteById(@Valid @RequestBody SqlLogSaveOrUpdateVO param) {
 
@@ -117,7 +117,7 @@ public class SqlLogController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "下载SQL日志表", notes = "下载SQL日志表", produces = "application/json")
+    @Operation(summary = "下载SQL日志表")
     @PostMapping("download")
     public void download(HttpServletResponse response,@Valid @RequestBody SqlLogQueryVO param) throws IOException {
 
@@ -132,7 +132,7 @@ public class SqlLogController extends BaseController {
         EasyExcel.write(response.getOutputStream(), SqlLogExportDTO.class).registerConverter(new LocalDateTimeConverter()).sheet().doWrite(result.getData());
     }
 
-    @ApiOperation(value = "根据编号获取SQL日志表", notes = "根据编号获取SQL日志表", produces = "application/json")
+    @Operation(summary = "根据编号获取SQL日志表")
     @PostMapping("/getById")
     public JsonResult getById(@Valid @RequestBody SqlLogSaveOrUpdateVO param) {
 

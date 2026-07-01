@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.6.RELEASE</version>
+        <version>3.3.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.pig.easy.bpm</groupId>
@@ -49,51 +49,47 @@
     <properties>
 
         <easybpm.version>1.0.1</easybpm.version>
-        <java.version>1.8</java.version>
+        <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <fastjson.version>1.2.62</fastjson.version>
-        <spring.boot.version>2.2.6.RELEASE</spring.boot.version>
+        <fastjson.version>1.2.83</fastjson.version>
+        <spring.boot.version>3.3.5</spring.boot.version>
         <spring-context-support.version>1.0.6</spring-context-support.version>
 
-        <jackson.version>2.9.6</jackson.version>
-        <jackson-datatype-jsr310.version>2.10.3</jackson-datatype-jsr310.version>
-        <fastjson.version>1.2.62</fastjson.version>
-        <jedis.version>3.1.0</jedis.version>
+        <jedis.version>5.2.0</jedis.version>
 
-        <druid.version>1.1.21</druid.version>
-        <mysql.version>8.0.17</mysql.version>
-        <mybatis-plus-generate.version>3.3.0</mybatis-plus-generate.version>
-        <mybatis-plus-boot-starter.version>3.3.0</mybatis-plus-boot-starter.version>
-        <mybatis-typehandlers-jsr310.version>1.0.1</mybatis-typehandlers-jsr310.version>
+        <druid.version>1.2.23</druid.version>
+        <mysql.version>8.3.0</mysql.version>
+        <mybatis-plus-generate.version>3.5.9</mybatis-plus-generate.version>
+        <mybatis-plus-boot-starter.version>3.5.9</mybatis-plus-boot-starter.version>
+        <mybatis-typehandlers-jsr310.version>1.0.2</mybatis-typehandlers-jsr310.version>
 
-        <io.netty.version>4.1.32.Final</io.netty.version>
-        <pagehelper.version>1.2.12</pagehelper.version>
+        <io.netty.version>4.1.116.Final</io.netty.version>
+        <pagehelper.version>6.1.0</pagehelper.version>
         <juel.version>2.1.0</juel.version>
-        <flowable.version>6.4.1</flowable.version>
+        <flowable.version>7.1.0</flowable.version>
 
         <velocity.version>1.7</velocity.version>
-        <java-jwt.version>3.4.1</java-jwt.version>
-        <commons-lang3.version>3.8.1</commons-lang3.version>
+        <java-jwt.version>4.4.0</java-jwt.version>
+        <commons-lang3.version>3.17.0</commons-lang3.version>
         <commons-lang.version>2.6</commons-lang.version>
-        <transmittable-thread-local>2.11.4</transmittable-thread-local>
-        <swagger.version>2.7.0</swagger.version>
-        <commons-beanutils.version>1.9.3</commons-beanutils.version>
+        <transmittable-thread-local>2.14.4</transmittable-thread-local>
+        <springdoc.version>2.6.0</springdoc.version>
+        <commons-beanutils.version>1.9.4</commons-beanutils.version>
         <!--<sharding-jdbc.version>4.0.0</sharding-jdbc.version>-->
-        <freemarker.version>2.3.30</freemarker.version>
+        <freemarker.version>2.3.33</freemarker.version>
 
-        <oshi.version>5.3.6</oshi.version>
-        <jna.version>5.6.0</jna.version>
+        <oshi.version>6.6.5</oshi.version>
+        <jna.version>5.14.0</jna.version>
 
         <groovy-all.version>3.0.7</groovy-all.version>
 
-        <commons.io.version>2.5</commons.io.version>
-        <commons.fileupload.version>1.3.3</commons.fileupload.version>
-        <easyexcel.version>2.2.5</easyexcel.version>
+        <commons.io.version>2.18.0</commons.io.version>
+        <commons.fileupload.version>1.5</commons.fileupload.version>
+        <easyexcel.version>4.0.3</easyexcel.version>
         <kaptcha.version>2.3.2</kaptcha.version>
         <bitwalker.version>1.21</bitwalker.version>
-        <commons-beanutils.version>1.9.4</commons-beanutils.version>
         <skipTests>true</skipTests>
     </properties>
 
@@ -133,33 +129,6 @@
             </dependency>
 
 
-            <dependency>
-                <groupId>org.mybatis.spring.boot</groupId>
-                <artifactId>mybatis-spring-boot-autoconfigure</artifactId>
-                <version>1.3.2</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.fasterxml.jackson.module</groupId>
-                <artifactId>jackson-module-parameter-names</artifactId>
-                <version>${jackson-datatype-jsr310.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.fasterxml.jackson.datatype</groupId>
-                <artifactId>jackson-datatype-jdk8</artifactId>
-                <version>${jackson-datatype-jsr310.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.fasterxml.jackson.datatype</groupId>
-                <artifactId>jackson-datatype-jsr310</artifactId>
-                <version>${jackson-datatype-jsr310.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-databind</artifactId>
-                <version>${jackson.version}</version>
-            </dependency>
             <!-- 解析客户端操作系统、浏览器等 -->
             <dependency>
                 <groupId>eu.bitwalker</groupId>
@@ -258,8 +227,8 @@
             <!-- 分页插件 -->
             <dependency>
                 <groupId>com.github.pagehelper</groupId>
-                <artifactId>pagehelper-spring-boot-starter</artifactId>
-                <version>1.2.12</version>
+                <artifactId>pagehelper</artifactId>
+                <version>${pagehelper.version}</version>
             </dependency>
 
 
@@ -285,7 +254,7 @@
             <!--阿里数据库连接池 -->
             <dependency>
                 <groupId>com.alibaba</groupId>
-                <artifactId>druid-spring-boot-starter</artifactId>
+                <artifactId>druid-spring-boot-3-starter</artifactId>
                 <version>${druid.version}</version>
             </dependency>
 
@@ -308,8 +277,8 @@
                 </exclusions>
             </dependency>
             <dependency>
-                <groupId>mysql</groupId>
-                <artifactId>mysql-connector-java</artifactId>
+                <groupId>com.mysql</groupId>
+                <artifactId>mysql-connector-j</artifactId>
                 <version>${mysql.version}</version>
                 <scope>runtime</scope>
             </dependency>
@@ -323,7 +292,13 @@
             <!-- mybatis plus -->
             <dependency>
                 <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
+                <version>${mybatis-plus-boot-starter.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-jsqlparser</artifactId>
                 <version>${mybatis-plus-boot-starter.version}</version>
             </dependency>
 
@@ -356,17 +331,11 @@
                 <version>${java-jwt.version}</version>
             </dependency>
 
-            <!--Swagger-->
+            <!--SpringDoc OpenAPI-->
             <dependency>
-                <groupId>io.springfox</groupId>
-                <artifactId>springfox-swagger2</artifactId>
-                <version>${swagger.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>io.springfox</groupId>
-                <artifactId>springfox-swagger-ui</artifactId>
-                <version>${swagger.version}</version>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+                <version>${springdoc.version}</version>
             </dependency>
 
 
@@ -407,9 +376,9 @@
             <optional>true</optional>
         </dependency>
         <dependency>
-            <groupId>javax.persistence</groupId>
-            <artifactId>javax.persistence-api</artifactId>
-            <version>2.2</version>
+            <groupId>jakarta.persistence</groupId>
+            <artifactId>jakarta.persistence-api</artifactId>
+            <version>3.1.0</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -440,10 +409,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
+                <version>3.11.0</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>17</source>
+                    <target>17</target>
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
@@ -463,9 +432,9 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.14.1</version>
+                <version>3.2.5</version>
                 <configuration>
-                    <skip>true</skip>
+                    <skipTests>${skipTests}</skipTests>
                 </configuration>
             </plugin>
         </plugins>

@@ -22,7 +22,7 @@ import org.flowable.task.service.delegate.DelegateTask;
 import org.flowable.task.service.impl.persistence.entity.TaskEntity;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import java.time.LocalDateTime;
 import java.util.Map;
 
@@ -126,7 +126,7 @@ public class CreateUserTaskListener implements TaskListener {
         HistoryManager historyManager = Context.getProcessEngineConfiguration().getHistoryManager();
         taskEntity.setAssignee(userTaskAssignee);
         taskEntity.setOwner(userTaskAssignee);
-        historyManager.recordTaskInfoChange(taskEntity, taskEntity.getProcessInstanceId());
+        historyManager.recordTaskInfoChange(taskEntity, taskEntity.getProcessInstanceId(), new java.util.Date());
 
         log.info("#####CreateUserTaskListener#####[{}][{}]###end###", delegateTask.getId(), delegateTask.getName());
 

@@ -263,13 +263,6 @@ public class NodeDO extends Model<NodeDO> {
      */
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
-
-
-    @Override
-    protected Serializable pkVal() {
-        return this.id;
-    }
-
     public Long getId() {
         return id;
     }

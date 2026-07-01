@@ -81,11 +81,4 @@ public class TemplateGroupDO extends Model<TemplateGroupDO> {
      */
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
-
-
-    @Override
-    protected Serializable pkVal() {
-        return this.templateGroupId;
-    }
-
 }

@@ -16,15 +16,15 @@ import com.pig.easy.bpm.generator.dto.response.TemplateExportDTO;
 import com.pig.easy.bpm.generator.service.TemplateService;
 import com.pig.easy.bpm.generator.vo.request.TemplateQueryVO;
 import com.pig.easy.bpm.generator.vo.request.TemplateSaveOrUpdateVO;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.List;
@@ -45,7 +45,7 @@ public class TemplateController {
     @Autowired
     TemplateService service;
 
-    @ApiOperation(value = "查询模板表列表", notes = "查询模板表列表", produces = "application/json")
+    @Operation(summary = "查询模板表列表")
     @PostMapping("/getListPage")
     public JsonResult getListPage(@Valid @RequestBody TemplateQueryVO param) {
 
@@ -59,7 +59,7 @@ public class TemplateController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "查询模板表列表", notes = "查询模板表列表", produces = "application/json")
+    @Operation(summary = "查询模板表列表")
     @PostMapping("/getList")
     public JsonResult getList(@Valid @RequestBody TemplateQueryVO param) {
 
@@ -73,7 +73,7 @@ public class TemplateController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "新增模板表", notes = "新增模板表", produces = "application/json")
+    @Operation(summary = "新增模板表")
     @PostMapping("/insert")
     public JsonResult insertTemplate(@Valid @RequestBody TemplateSaveOrUpdateVO param) {
 
@@ -87,7 +87,7 @@ public class TemplateController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "修改模板表", notes = "修改模板表", produces = "application/json")
+    @Operation(summary = "修改模板表")
     @PostMapping("/update")
     public JsonResult updateTemplate(@Valid @RequestBody TemplateSaveOrUpdateVO param) {
 
@@ -101,7 +101,7 @@ public class TemplateController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "删除模板表", notes = "删除模板表", produces = "application/json")
+    @Operation(summary = "删除模板表")
     @PostMapping("/deleteById")
     public JsonResult deleteById(@Valid @RequestBody TemplateSaveOrUpdateVO param) {
 
@@ -116,7 +116,7 @@ public class TemplateController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "下载模板表", notes = "下载模板表", produces = "application/json")
+    @Operation(summary = "下载模板表")
     @PostMapping("download")
     public void download(HttpServletResponse response,@Valid @RequestBody TemplateQueryVO param) throws IOException {
 
@@ -131,7 +131,7 @@ public class TemplateController {
         EasyExcel.write(response.getOutputStream(), TemplateExportDTO.class).registerConverter(new LocalDateTimeConverter()).sheet().doWrite(result.getData());
     }
 
-    @ApiOperation(value = "根据编号获取模板表", notes = "根据编号获取模板表", produces = "application/json")
+    @Operation(summary = "根据编号获取模板表")
     @PostMapping("/getById")
     public JsonResult getById(@Valid @RequestBody TemplateSaveOrUpdateVO param) {
 

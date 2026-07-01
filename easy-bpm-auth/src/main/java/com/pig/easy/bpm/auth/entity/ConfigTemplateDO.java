@@ -106,11 +106,4 @@ public class ConfigTemplateDO extends Model<ConfigTemplateDO> {
      */
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
-
-
-    @Override
-    protected Serializable pkVal() {
-        return this.templateId;
-    }
-
 }

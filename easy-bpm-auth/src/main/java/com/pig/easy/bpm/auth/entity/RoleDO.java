@@ -118,11 +118,4 @@ public class RoleDO extends Model<RoleDO> {
      */
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
-
-
-    @Override
-    protected Serializable pkVal() {
-        return this.roleId;
-    }
-
 }

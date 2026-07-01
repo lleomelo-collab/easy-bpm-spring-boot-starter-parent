@@ -216,11 +216,4 @@ public class ColumnDO extends Model<ColumnDO> {
      */
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
-
-
-    @Override
-    protected Serializable pkVal() {
-        return this.columnId;
-    }
-
 }

@@ -186,11 +186,4 @@ public class TableStrategyConfigDO extends Model<TableStrategyConfigDO> {
      */
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
-
-
-    @Override
-    protected Serializable pkVal() {
-        return this.configId;
-    }
-
 }

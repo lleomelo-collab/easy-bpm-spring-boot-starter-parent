@@ -1,11 +1,13 @@
 package com.pig.easy.bpm.api.spring.listener;
 
 import com.pig.easy.bpm.common.spring.listener.BpmApplicationListener;
+import org.springframework.boot.ConfigurableBootstrapContext;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.Ordered;
 import org.springframework.core.env.ConfigurableEnvironment;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +44,7 @@ public class BpmSpringApplicationRunListener implements org.springframework.boot
     }
 
     @Override
-    public void starting() {
+    public void starting(ConfigurableBootstrapContext bootstrapContext) {
         System.out.println("bootstrapContext ===============================starting========================================= " );
         for (BpmApplicationListener bpmApplicationListener : bpmApplicationListeners) {
             bpmApplicationListener.starting();
@@ -50,7 +52,7 @@ public class BpmSpringApplicationRunListener implements org.springframework.boot
     }
 
     @Override
-    public void environmentPrepared(ConfigurableEnvironment environment) {
+    public void environmentPrepared(ConfigurableBootstrapContext bootstrapContext, ConfigurableEnvironment environment) {
         for (BpmApplicationListener bpmApplicationListener : bpmApplicationListeners) {
             bpmApplicationListener.environmentPrepared(environment);
         }
@@ -71,14 +73,14 @@ public class BpmSpringApplicationRunListener implements org.springframework.boot
     }
 
     @Override
-    public void started(ConfigurableApplicationContext context) {
+    public void started(ConfigurableApplicationContext context, Duration timeTaken) {
         for (BpmApplicationListener bpmApplicationListener : bpmApplicationListeners) {
             bpmApplicationListener.started(context);
         }
     }
 
     @Override
-    public void running(ConfigurableApplicationContext context) {
+    public void ready(ConfigurableApplicationContext context, Duration timeTaken) {
         for (BpmApplicationListener bpmApplicationListener : bpmApplicationListeners) {
             bpmApplicationListener.running(context);
         }

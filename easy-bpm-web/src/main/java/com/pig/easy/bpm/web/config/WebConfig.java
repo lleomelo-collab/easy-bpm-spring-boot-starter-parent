@@ -21,7 +21,7 @@ import java.util.List;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
-    private static List<String> EXCLUDE_PATH = Arrays.asList("/static/**","/db/**", "/templates/**","/swagger-resources/**", "/webjars/**", "/v2/**", "/swagger-ui.html/**","/mapper/**");
+    private static List<String> EXCLUDE_PATH = Arrays.asList("/static/**","/db/**", "/templates/**","/swagger-resources/**", "/webjars/**", "/v3/**", "/swagger-ui/**","/mapper/**");
 
     @Autowired
     private CheckTokenIntercepteor checkTokenIntercepteor;
@@ -46,7 +46,7 @@ public class WebConfig implements WebMvcConfigurer {
         );
         fastJsonConfig.setDateFormat("yyyy-MM-dd HH:mm:ss");
         fastConverter.setFastJsonConfig(fastJsonConfig);
-        fastConverter.setSupportedMediaTypes(Arrays.asList(MediaType.APPLICATION_JSON, MediaType.APPLICATION_JSON_UTF8, MediaType.APPLICATION_OCTET_STREAM));
+        fastConverter.setSupportedMediaTypes(Arrays.asList(MediaType.APPLICATION_JSON, MediaType.APPLICATION_OCTET_STREAM));
         converters.add(0, fastConverter);
     }
 
@@ -62,10 +62,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .addResourceLocations("classpath:/db/");
         registry.addResourceHandler("/**")
                 .addResourceLocations("classpath:/static/");
-        registry.addResourceHandler("swagger-ui.html")
-                .addResourceLocations("classpath:/META-INF/resources/");
-        registry.addResourceHandler("/webjars/**")
-                .addResourceLocations("classpath:/META-INF/resources/webjars/");
+
     }
 
     /**
@@ -76,7 +73,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("*")
+                .allowedOriginPatterns("*")
                 .allowCredentials(true)
                 .allowedMethods("GET", "POST", "DELETE", "PUT", "OPTIONS")
                 .maxAge(3600);

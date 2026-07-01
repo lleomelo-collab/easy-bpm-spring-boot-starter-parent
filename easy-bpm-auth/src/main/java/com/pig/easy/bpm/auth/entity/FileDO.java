@@ -154,11 +154,4 @@ public class FileDO extends Model<FileDO> {
      */
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
-
-
-    @Override
-    protected Serializable pkVal() {
-        return this.fileId;
-    }
-
 }

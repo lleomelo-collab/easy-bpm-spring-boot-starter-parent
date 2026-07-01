@@ -172,11 +172,4 @@ public class OperatorLogDO extends Model<OperatorLogDO> {
      */
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
-
-
-    @Override
-    protected Serializable pkVal() {
-        return this.logId;
-    }
-
 }

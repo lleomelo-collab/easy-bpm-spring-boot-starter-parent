@@ -136,11 +136,4 @@ public class ProcessDO extends Model<ProcessDO> {
      */
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
-
-
-    @Override
-    protected Serializable pkVal() {
-        return this.processId;
-    }
-
 }

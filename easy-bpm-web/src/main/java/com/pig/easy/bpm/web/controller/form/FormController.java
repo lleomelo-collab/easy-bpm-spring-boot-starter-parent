@@ -16,15 +16,15 @@ import com.pig.easy.bpm.common.utils.BeanUtils;
 import com.pig.easy.bpm.common.utils.EasyBpmAsset;
 import com.pig.easy.bpm.common.utils.JsonResult;
 import com.pig.easy.bpm.common.utils.Result;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.List;
@@ -45,7 +45,7 @@ public class FormController {
     @Autowired
     FormService service;
 
-    @ApiOperation(value = "查询列表", notes = "查询列表", produces = "application/json")
+    @Operation(summary = "查询列表")
     @PostMapping("/getListPage")
     public JsonResult getListPage(@Valid @RequestBody FormQueryVO param) {
 
@@ -59,7 +59,7 @@ public class FormController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "查询列表", notes = "查询列表", produces = "application/json")
+    @Operation(summary = "查询列表")
     @PostMapping("/getList")
     public JsonResult getList(@Valid @RequestBody FormQueryVO param) {
 
@@ -73,7 +73,7 @@ public class FormController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "新增", notes = "新增", produces = "application/json")
+    @Operation(summary = "新增")
     @PostMapping("/insert")
     public JsonResult insertForm(@Valid @RequestBody FormSaveOrUpdateVO param) {
 
@@ -87,7 +87,7 @@ public class FormController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "修改", notes = "修改", produces = "application/json")
+    @Operation(summary = "修改")
     @PostMapping("/update")
     public JsonResult updateForm(@Valid @RequestBody FormSaveOrUpdateVO param) {
 
@@ -101,7 +101,7 @@ public class FormController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "删除", notes = "删除", produces = "application/json")
+    @Operation(summary = "删除")
     @PostMapping("/deleteById")
     public JsonResult deleteById(@Valid @RequestBody FormSaveOrUpdateVO param) {
 
@@ -116,7 +116,7 @@ public class FormController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "下载", notes = "下载", produces = "application/json")
+    @Operation(summary = "下载")
     @PostMapping("download")
     public void download(HttpServletResponse response,@Valid @RequestBody FormQueryVO param) throws IOException {
 
@@ -131,7 +131,7 @@ public class FormController {
         EasyExcel.write(response.getOutputStream(), FormExportDTO.class).registerConverter(new LocalDateTimeConverter()).sheet().doWrite(result.getData());
     }
 
-    @ApiOperation(value = "根据编号获取", notes = "根据编号获取", produces = "application/json")
+    @Operation(summary = "根据编号获取")
     @PostMapping("/getById")
     public JsonResult getById(@Valid @RequestBody FormSaveOrUpdateVO param) {
 

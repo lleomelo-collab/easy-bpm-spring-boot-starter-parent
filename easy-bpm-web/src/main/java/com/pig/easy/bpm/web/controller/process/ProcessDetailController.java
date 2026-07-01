@@ -16,13 +16,13 @@ import com.pig.easy.bpm.common.utils.*;
 import com.pig.easy.bpm.web.vo.request.ProcessDetailQueryVO;
 import com.pig.easy.bpm.web.vo.request.ProcessDetailSaveOrUpdateVO;
 import com.pig.easy.bpm.web.vo.request.ProcessPublishVO;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.List;
@@ -43,7 +43,7 @@ public class ProcessDetailController extends BaseController {
     @Autowired
     ProcessDetailService service;
 
-    @ApiOperation(value = "查询列表", notes = "查询列表", produces = "application/json")
+    @Operation(summary = "查询列表")
     @PostMapping("/getListPage")
     public JsonResult getListPage(@Valid @RequestBody ProcessDetailQueryVO param) {
 
@@ -57,7 +57,7 @@ public class ProcessDetailController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "查询列表", notes = "查询列表", produces = "application/json")
+    @Operation(summary = "查询列表")
     @PostMapping("/getList")
     public JsonResult getList(@Valid @RequestBody ProcessDetailQueryVO param) {
 
@@ -71,7 +71,7 @@ public class ProcessDetailController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "新增", notes = "新增", produces = "application/json")
+    @Operation(summary = "新增")
     @PostMapping("/insert")
     public JsonResult insertProcessDetail(@Valid @RequestBody ProcessDetailSaveOrUpdateVO param) {
 
@@ -85,7 +85,7 @@ public class ProcessDetailController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "修改", notes = "修改", produces = "application/json")
+    @Operation(summary = "修改")
     @PostMapping("/update")
     public JsonResult updateProcessDetail(@Valid @RequestBody ProcessDetailSaveOrUpdateVO param) {
 
@@ -99,7 +99,7 @@ public class ProcessDetailController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "删除", notes = "删除", produces = "application/json")
+    @Operation(summary = "删除")
     @PostMapping("/deleteById")
     public JsonResult deleteById(@Valid @RequestBody ProcessDetailSaveOrUpdateVO param) {
 
@@ -114,7 +114,7 @@ public class ProcessDetailController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "下载", notes = "下载", produces = "application/json")
+    @Operation(summary = "下载")
     @PostMapping("download")
     public void download(HttpServletResponse response, @Valid @RequestBody ProcessDetailQueryVO param) throws IOException {
 
@@ -129,7 +129,7 @@ public class ProcessDetailController extends BaseController {
         EasyExcel.write(response.getOutputStream(), ProcessDetailExportDTO.class).registerConverter(new LocalDateTimeConverter()).sheet().doWrite(result.getData());
     }
 
-    @ApiOperation(value = "根据编号获取", notes = "根据编号获取", produces = "application/json")
+    @Operation(summary = "根据编号获取")
     @PostMapping("/getById")
     public JsonResult getById(@Valid @RequestBody ProcessDetailSaveOrUpdateVO param) {
 
@@ -143,7 +143,7 @@ public class ProcessDetailController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "发布流程", notes = "发布流程", produces = "application/json")
+    @Operation(summary = "发布流程")
     @PostMapping("/publish")
     public JsonResult publish(@RequestBody ProcessPublishVO processPublishVO) {
 
@@ -166,11 +166,11 @@ public class ProcessDetailController extends BaseController {
     }
 
 
-    @ApiOperation(value = "修改默认版本", notes = "修改默认版本", produces = "application/json")
+    @Operation(summary = "修改默认版本")
     @PostMapping("/updateDefaultVersion/{processId}/{processDetailId}")
     public JsonResult updateDefaultVersion(
-            @ApiParam(required = true, name = "流程编号", value = "processId", example = "1") @PathVariable("processId") Long processId,
-            @ApiParam(required = true, name = "流程详细编号", value = "processDetailId", example = "1") @PathVariable("processDetailId") Long processDetailId
+            @Parameter(required = true, name = "processId", description = "流程编号", example = "1") @PathVariable("processId") Long processId,
+            @Parameter(required = true, name = "processDetailId", description = "流程详细编号", example = "1") @PathVariable("processDetailId") Long processDetailId
     ) {
         Result<Boolean> result = service.updateDefaultVersion(processId, processDetailId, currentUserInfo().getUserId(), currentUserInfo().getRealName());
         if (result.getEntityError().getCode() != EntityError.SUCCESS.getCode()) {
@@ -180,10 +180,10 @@ public class ProcessDetailController extends BaseController {
 
     }
 
-    @ApiOperation(value = "获取流程详细信息", notes = "获取流程详细信息", produces = "application/json")
+    @Operation(summary = "获取流程详细信息")
     @PostMapping("/getProcessDetailById/{processDetailId}")
     public JsonResult getProcessDetailById(
-            @ApiParam(required = true, name = "流程详细编号", value = "processDetailId", example = "1") @PathVariable("processDetailId") Long processDetailId) {
+            @Parameter(required = true, name = "processDetailId", description = "流程详细编号", example = "1") @PathVariable("processDetailId") Long processDetailId) {
         Result<ProcessDetailDTO> result = service.getProcessDetailById(processDetailId);
         if (result.getEntityError().getCode() != EntityError.SUCCESS.getCode()) {
             return JsonResult.error(result.getEntityError());
@@ -191,7 +191,7 @@ public class ProcessDetailController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "新增或修改流程详细信息", notes = "新增或修改流程详细信息", produces = "application/json")
+    @Operation(summary = "新增或修改流程详细信息")
     @PostMapping("/insertOrUpdate")
     public JsonResult insertOrUpdate(@Valid @RequestBody ProcessDetailSaveOrUpdateVO processDetailVO) {
 

@@ -148,11 +148,4 @@ public class VariableDictDO extends Model<VariableDictDO> {
      */
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
-
-
-    @Override
-    protected Serializable pkVal() {
-        return this.variableId;
-    }
-
 }

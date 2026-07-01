@@ -17,13 +17,13 @@ import com.pig.easy.bpm.common.utils.JsonResult;
 import com.pig.easy.bpm.common.utils.Result;
 import com.pig.easy.bpm.web.vo.request.MenuQueryVO;
 import com.pig.easy.bpm.web.vo.request.MenuSaveOrUpdateVO;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.List;
@@ -44,7 +44,7 @@ public class MenuController {
     @Autowired
     MenuService service;
 
-    @ApiOperation(value = "查询菜单表列表", notes = "查询菜单表列表", produces = "application/json")
+    @Operation(summary = "查询菜单表列表")
     @PostMapping("/getListPage")
     public JsonResult getListPage(@Valid @RequestBody MenuQueryVO param) {
 
@@ -58,7 +58,7 @@ public class MenuController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "查询菜单表列表", notes = "查询菜单表列表", produces = "application/json")
+    @Operation(summary = "查询菜单表列表")
     @PostMapping("/getList")
     public JsonResult getList(@Valid @RequestBody MenuQueryVO param) {
 
@@ -72,7 +72,7 @@ public class MenuController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "新增菜单表", notes = "新增菜单表", produces = "application/json")
+    @Operation(summary = "新增菜单表")
     @PostMapping("/insert")
     public JsonResult insertMenu(@Valid @RequestBody MenuSaveOrUpdateVO param) {
 
@@ -86,7 +86,7 @@ public class MenuController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "修改菜单表", notes = "修改菜单表", produces = "application/json")
+    @Operation(summary = "修改菜单表")
     @PostMapping("/update")
     public JsonResult updateMenu(@Valid @RequestBody MenuSaveOrUpdateVO param) {
 
@@ -100,7 +100,7 @@ public class MenuController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "删除菜单表", notes = "删除菜单表", produces = "application/json")
+    @Operation(summary = "删除菜单表")
     @PostMapping("/deleteById")
     public JsonResult deleteById(@Valid @RequestBody MenuSaveOrUpdateVO param) {
 
@@ -115,7 +115,7 @@ public class MenuController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "下载菜单表", notes = "下载菜单表", produces = "application/json")
+    @Operation(summary = "下载菜单表")
     @PostMapping("download")
     public void download(HttpServletResponse response,@Valid @RequestBody MenuQueryVO param) throws IOException {
 
@@ -130,9 +130,9 @@ public class MenuController {
         EasyExcel.write(response.getOutputStream(), MenuExportDTO.class).registerConverter(new LocalDateTimeConverter()).sheet().doWrite(result.getData());
     }
 
-    @ApiOperation(value = "查询树形菜单", notes = "查询树形菜单", produces = "application/json")
+    @Operation(summary = "查询树形菜单")
     @PostMapping("/getMenuTree/{tenantId}")
-    public JsonResult getList(@ApiParam(required = true, name = "租户编号", value = "tenantId", example = "pig") @PathVariable("tenantId") String tenantId) {
+    public JsonResult getList(@Parameter(required = true, name = "tenantId", description = "租户编号", example = "pig") @PathVariable("tenantId") String tenantId) {
 
        EasyBpmAsset.isAssetEmpty(tenantId);
         Result<List<MenuTreeDTO>> result = service.getMenuTree(tenantId, null);
@@ -143,7 +143,7 @@ public class MenuController {
     }
 
 
-    @ApiOperation(value = "根据编号获取菜单表", notes = "根据编号获取菜单表", produces = "application/json")
+    @Operation(summary = "根据编号获取菜单表")
     @PostMapping("/getById")
     public JsonResult getById(@Valid @RequestBody MenuSaveOrUpdateVO param) {
 

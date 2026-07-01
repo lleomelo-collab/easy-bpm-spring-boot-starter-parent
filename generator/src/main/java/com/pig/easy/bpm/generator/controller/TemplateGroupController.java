@@ -16,15 +16,15 @@ import com.pig.easy.bpm.generator.dto.response.TemplateGroupExportDTO;
 import com.pig.easy.bpm.generator.service.TemplateGroupService;
 import com.pig.easy.bpm.generator.vo.request.TemplateGroupQueryVO;
 import com.pig.easy.bpm.generator.vo.request.TemplateGroupSaveOrUpdateVO;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.List;
@@ -45,7 +45,7 @@ public class TemplateGroupController {
     @Autowired
     TemplateGroupService service;
 
-    @ApiOperation(value = "查询模板分组表列表", notes = "查询模板分组表列表", produces = "application/json")
+    @Operation(summary = "查询模板分组表列表")
     @PostMapping("/getListPage")
     public JsonResult getListPage(@Valid @RequestBody TemplateGroupQueryVO param) {
 
@@ -59,7 +59,7 @@ public class TemplateGroupController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "查询模板分组表列表", notes = "查询模板分组表列表", produces = "application/json")
+    @Operation(summary = "查询模板分组表列表")
     @PostMapping("/getList")
     public JsonResult getList(@Valid @RequestBody TemplateGroupQueryVO param) {
 
@@ -73,7 +73,7 @@ public class TemplateGroupController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "新增模板分组表", notes = "新增模板分组表", produces = "application/json")
+    @Operation(summary = "新增模板分组表")
     @PostMapping("/insert")
     public JsonResult insertTemplateGroup(@Valid @RequestBody TemplateGroupSaveOrUpdateVO param) {
 
@@ -87,7 +87,7 @@ public class TemplateGroupController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "修改模板分组表", notes = "修改模板分组表", produces = "application/json")
+    @Operation(summary = "修改模板分组表")
     @PostMapping("/update")
     public JsonResult updateTemplateGroup(@Valid @RequestBody TemplateGroupSaveOrUpdateVO param) {
 
@@ -101,7 +101,7 @@ public class TemplateGroupController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "删除模板分组表", notes = "删除模板分组表", produces = "application/json")
+    @Operation(summary = "删除模板分组表")
     @PostMapping("/deleteById")
     public JsonResult deleteById(@Valid @RequestBody TemplateGroupSaveOrUpdateVO param) {
 
@@ -116,7 +116,7 @@ public class TemplateGroupController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "下载模板分组表", notes = "下载模板分组表", produces = "application/json")
+    @Operation(summary = "下载模板分组表")
     @PostMapping("download")
     public void download(HttpServletResponse response,@Valid @RequestBody TemplateGroupQueryVO param) throws IOException {
 
@@ -131,7 +131,7 @@ public class TemplateGroupController {
         EasyExcel.write(response.getOutputStream(), TemplateGroupExportDTO.class).registerConverter(new LocalDateTimeConverter()).sheet().doWrite(result.getData());
     }
 
-    @ApiOperation(value = "根据编号获取模板分组表", notes = "根据编号获取模板分组表", produces = "application/json")
+    @Operation(summary = "根据编号获取模板分组表")
     @PostMapping("/getById")
     public JsonResult getById(@Valid @RequestBody TemplateGroupSaveOrUpdateVO param) {
 

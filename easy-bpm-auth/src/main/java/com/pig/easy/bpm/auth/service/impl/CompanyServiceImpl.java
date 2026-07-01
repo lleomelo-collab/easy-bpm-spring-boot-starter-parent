@@ -19,7 +19,6 @@ import com.pig.easy.bpm.common.utils.*;
 import com.pig.easy.bpm.common.utils.id.SnowKeyGenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sun.security.krb5.internal.PAData;
 
 import java.util.ArrayList;
 import java.util.Iterator;

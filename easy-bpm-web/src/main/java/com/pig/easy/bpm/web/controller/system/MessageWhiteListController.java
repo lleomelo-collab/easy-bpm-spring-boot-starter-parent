@@ -17,15 +17,15 @@ import com.pig.easy.bpm.common.utils.JsonResult;
 import com.pig.easy.bpm.common.utils.Result;
 import com.pig.easy.bpm.web.vo.request.MessageWhiteListQueryVO;
 import com.pig.easy.bpm.web.vo.request.MessageWhiteListSaveOrUpdateVO;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.List;
@@ -46,7 +46,7 @@ public class MessageWhiteListController extends BaseController {
     @Autowired
     MessageWhiteListService service;
 
-    @ApiOperation(value = "查询通知白名单列表", notes = "查询通知白名单列表", produces = "application/json")
+    @Operation(summary = "查询通知白名单列表")
     @PostMapping("/getListPage")
     public JsonResult getListPage(@Valid @RequestBody MessageWhiteListQueryVO param) {
 
@@ -60,7 +60,7 @@ public class MessageWhiteListController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "查询通知白名单列表", notes = "查询通知白名单列表", produces = "application/json")
+    @Operation(summary = "查询通知白名单列表")
     @PostMapping("/getList")
     public JsonResult getList(@Valid @RequestBody MessageWhiteListQueryVO param) {
 
@@ -74,7 +74,7 @@ public class MessageWhiteListController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "新增通知白名单", notes = "新增通知白名单", produces = "application/json")
+    @Operation(summary = "新增通知白名单")
     @PostMapping("/insert")
     public JsonResult insertMessageWhiteList(@Valid @RequestBody MessageWhiteListSaveOrUpdateVO param) {
 
@@ -88,7 +88,7 @@ public class MessageWhiteListController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "修改通知白名单", notes = "修改通知白名单", produces = "application/json")
+    @Operation(summary = "修改通知白名单")
     @PostMapping("/update")
     public JsonResult updateMessageWhiteList(@Valid @RequestBody MessageWhiteListSaveOrUpdateVO param) {
 
@@ -102,7 +102,7 @@ public class MessageWhiteListController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "删除通知白名单", notes = "删除通知白名单", produces = "application/json")
+    @Operation(summary = "删除通知白名单")
     @PostMapping("/deleteById")
     public JsonResult deleteById(@Valid @RequestBody MessageWhiteListSaveOrUpdateVO param) {
 
@@ -117,7 +117,7 @@ public class MessageWhiteListController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "下载通知白名单", notes = "下载通知白名单", produces = "application/json")
+    @Operation(summary = "下载通知白名单")
     @PostMapping("download")
     public void download(HttpServletResponse response,@Valid @RequestBody MessageWhiteListQueryVO param) throws IOException {
 
@@ -132,7 +132,7 @@ public class MessageWhiteListController extends BaseController {
         EasyExcel.write(response.getOutputStream(), MessageWhiteListExportDTO.class).registerConverter(new LocalDateTimeConverter()).sheet().doWrite(result.getData());
     }
 
-    @ApiOperation(value = "根据编号获取通知白名单", notes = "根据编号获取通知白名单", produces = "application/json")
+    @Operation(summary = "根据编号获取通知白名单")
     @PostMapping("/getById")
     public JsonResult getById(@Valid @RequestBody MessageWhiteListSaveOrUpdateVO param) {
 

@@ -22,14 +22,14 @@ import com.pig.easy.bpm.common.utils.JsonResult;
 import com.pig.easy.bpm.common.utils.Result;
 import com.pig.easy.bpm.web.vo.request.DictQueryVO;
 import com.pig.easy.bpm.web.vo.request.DictSaveOrUpdateVO;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.List;
@@ -58,7 +58,7 @@ public class DictController {
     @Autowired
     ProcessService processService;
 
-    @ApiOperation(value = "查询字典表列表", notes = "查询字典表列表", produces = "application/json")
+    @Operation(summary = "查询字典表列表")
     @PostMapping("/getListPage")
     public JsonResult getListPage(@Valid @RequestBody DictQueryVO param) {
 
@@ -72,7 +72,7 @@ public class DictController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "查询字典表列表", notes = "查询字典表列表", produces = "application/json")
+    @Operation(summary = "查询字典表列表")
     @PostMapping("/getList")
     public JsonResult getList(@Valid @RequestBody DictQueryVO param) {
 
@@ -86,7 +86,7 @@ public class DictController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "新增字典表", notes = "新增字典表", produces = "application/json")
+    @Operation(summary = "新增字典表")
     @PostMapping("/insert")
     public JsonResult insertDict(@Valid @RequestBody DictSaveOrUpdateVO param) {
 
@@ -100,7 +100,7 @@ public class DictController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "修改字典表", notes = "修改字典表", produces = "application/json")
+    @Operation(summary = "修改字典表")
     @PostMapping("/update")
     public JsonResult updateDict(@Valid @RequestBody DictSaveOrUpdateVO param) {
 
@@ -114,7 +114,7 @@ public class DictController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "删除字典表", notes = "删除字典表", produces = "application/json")
+    @Operation(summary = "删除字典表")
     @PostMapping("/deleteById")
     public JsonResult deleteById(@Valid @RequestBody DictSaveOrUpdateVO param) {
 
@@ -129,7 +129,7 @@ public class DictController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "下载字典表", notes = "下载字典表", produces = "application/json")
+    @Operation(summary = "下载字典表")
     @PostMapping("download")
     public void download(HttpServletResponse response,@Valid @RequestBody DictQueryVO param) throws IOException {
 
@@ -144,7 +144,7 @@ public class DictController {
         EasyExcel.write(response.getOutputStream(), DictExportDTO.class).registerConverter(new LocalDateTimeConverter()).sheet().doWrite(result.getData());
     }
 
-    @ApiOperation(value = "根据编号获取字典表", notes = "根据编号获取字典表", produces = "application/json")
+    @Operation(summary = "根据编号获取字典表")
     @PostMapping("/getById")
     public JsonResult getById(@Valid @RequestBody DictSaveOrUpdateVO param) {
 
@@ -158,10 +158,10 @@ public class DictController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "查询字典值", notes = "查询字典值", produces = "application/json")
+    @Operation(summary = "查询字典值")
     @PostMapping("/getDictListByDictCode/{dictCode}")
     public JsonResult getDictListByDictCode(
-            @ApiParam(required = true, name = "字典编码", value = "dictCode", example = "pig:dict:processStatus") @PathVariable("dictCode") String dictCode) {
+            @Parameter(required = true, name = "dictCode", description = "字典编码", example = "pig:dict:processStatus") @PathVariable("dictCode") String dictCode) {
 
         if(StringUtils.isEmpty(dictCode)){
             return JsonResult.error(EntityError.ILLEGAL_ARGUMENT_ERROR);
@@ -174,9 +174,9 @@ public class DictController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "查询角色字典", notes = "查询角色字典", produces = "application/json")
+    @Operation(summary = "查询角色字典")
     @PostMapping("/getRoleDictByTenantId/{tenantId}")
-    public JsonResult getRoleDictByTenantId(@ApiParam(required = true, name = "租户编号", value = "tenantId", example = "pig") @PathVariable("tenantId") String tenantId) {
+    public JsonResult getRoleDictByTenantId(@Parameter(required = true, name = "tenantId", description = "租户编号", example = "pig") @PathVariable("tenantId") String tenantId) {
 
         if(StringUtils.isEmpty(tenantId)){
             return JsonResult.error(EntityError.ILLEGAL_ARGUMENT_ERROR);
@@ -188,9 +188,9 @@ public class DictController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "查询角色组字典", notes = "查询角色组字典", produces = "application/json")
+    @Operation(summary = "查询角色组字典")
     @PostMapping("/getRoleGroupDictByTenantId/{tenantId}")
-    public JsonResult getRoleGroupDictByTenantId(@ApiParam(required = true, name = "租户编号", value = "tenantId", example = "pig") @PathVariable("tenantId") String tenantId) {
+    public JsonResult getRoleGroupDictByTenantId(@Parameter(required = true, name = "tenantId", description = "租户编号", example = "pig") @PathVariable("tenantId") String tenantId) {
 
         if(StringUtils.isEmpty(tenantId)){
             return JsonResult.error(EntityError.ILLEGAL_ARGUMENT_ERROR);
@@ -202,9 +202,9 @@ public class DictController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "查询部门字典", notes = "查询部门字典", produces = "application/json")
+    @Operation(summary = "查询部门字典")
     @PostMapping("/getDeptListByTenantId/{tenantId}")
-    public JsonResult getDeptListByTenantId(@ApiParam(required = true, name = "租户编号", value = "tenantId", example = "pig") @PathVariable("tenantId") String tenantId) {
+    public JsonResult getDeptListByTenantId(@Parameter(required = true, name = "tenantId", description = "租户编号", example = "pig") @PathVariable("tenantId") String tenantId) {
 
         if(StringUtils.isEmpty(tenantId)){
             return JsonResult.error(EntityError.ILLEGAL_ARGUMENT_ERROR);
@@ -218,9 +218,9 @@ public class DictController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "查询部门字典", notes = "查询部门字典", produces = "application/json")
+    @Operation(summary = "查询部门字典")
     @PostMapping("/getDeptIdItemList/{tenantId}")
-    public JsonResult getDeptIdItemList(@ApiParam(required = true, name = "租户编号", value = "tenantId", example = "pig") @PathVariable("tenantId") String tenantId) {
+    public JsonResult getDeptIdItemList(@Parameter(required = true, name = "tenantId", description = "租户编号", example = "pig") @PathVariable("tenantId") String tenantId) {
 
         if(StringUtils.isEmpty(tenantId)){
             return JsonResult.error(EntityError.ILLEGAL_ARGUMENT_ERROR);
@@ -236,9 +236,9 @@ public class DictController {
 
 
 
-    @ApiOperation(value = "获取流程列表字典", notes = "获取流程列表字典", produces = "application/json")
+    @Operation(summary = "获取流程列表字典")
     @PostMapping("/getProcessDict/{tenantId}")
-    public JsonResult getProcessDict(@ApiParam(required = true, name = "租户编号", value = "tenantId", example = "pig") @PathVariable("tenantId") String tenantId) {
+    public JsonResult getProcessDict(@Parameter(required = true, name = "tenantId", description = "租户编号", example = "pig") @PathVariable("tenantId") String tenantId) {
 
         if(StringUtils.isEmpty(tenantId)){
             return JsonResult.error(EntityError.ILLEGAL_ARGUMENT_ERROR);

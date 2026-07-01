@@ -174,11 +174,4 @@ public class UserDO extends Model<UserDO> {
      */
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
-
-
-    @Override
-    protected Serializable pkVal() {
-        return this.id;
-    }
-
 }

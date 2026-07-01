@@ -142,11 +142,4 @@ public class MessageContentDO extends Model<MessageContentDO> {
      */
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
-
-
-    @Override
-    protected Serializable pkVal() {
-        return this.contentId;
-    }
-
 }

@@ -146,11 +146,4 @@ public class MenuDO extends Model<MenuDO> {
      */
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
-
-
-    @Override
-    protected Serializable pkVal() {
-        return this.menuId;
-    }
-
 }

@@ -130,11 +130,4 @@ public class CompanyDO extends Model<CompanyDO> {
      */
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
-
-
-    @Override
-    protected Serializable pkVal() {
-        return this.companyId;
-    }
-
 }

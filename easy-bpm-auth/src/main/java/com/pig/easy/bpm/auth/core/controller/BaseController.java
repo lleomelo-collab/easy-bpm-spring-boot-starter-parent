@@ -7,7 +7,7 @@ import com.pig.easy.bpm.common.utils.BeanUtils;
 import com.pig.easy.bpm.common.utils.ip.IpUtils;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * todo:

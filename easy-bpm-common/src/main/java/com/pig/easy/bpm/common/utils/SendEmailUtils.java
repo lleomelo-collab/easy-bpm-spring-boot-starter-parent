@@ -1,13 +1,13 @@
 package com.pig.easy.bpm.common.utils;
 
-import com.sun.mail.util.MailSSLSocketFactory;
+import org.eclipse.angus.mail.util.MailSSLSocketFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeUtility;
+import jakarta.mail.internet.MimeMessage;
+import jakarta.mail.internet.MimeUtility;
 import java.io.File;
 import java.util.Date;
 import java.util.Map;

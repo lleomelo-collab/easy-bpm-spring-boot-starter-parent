@@ -177,11 +177,4 @@ public class FormDataDO extends Model<FormDataDO> {
      */
     @TableField("`operator_name`")
     private String operatorName;
-
-
-    @Override
-    protected Serializable pkVal() {
-        return this.dataId;
-    }
-
 }

@@ -1,26 +1,16 @@
 package com.pig.easy.bpm.generator.config;
 
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Contact;
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.info.License;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import springfox.documentation.builders.ApiInfoBuilder;
-import springfox.documentation.builders.PathSelectors;
-import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.service.Contact;
-import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-/**
- * todo: swagger 配置 可放入
- *
- * @author : pig
- * @date : 2020/5/15 14:00
- */
 @Configuration
-@EnableSwagger2
 @Profile({"local", "test", "prod"})
 public class SwaggerConfig {
 
@@ -44,21 +34,15 @@ public class SwaggerConfig {
     private String email;
 
     @Bean
-    public Docket createRestApi() {
+    public OpenAPI customOpenAPI() {
         checkData();
-        return new Docket(DocumentationType.SWAGGER_2)
-                .select()
-                .apis(RequestHandlerSelectors.basePackage(controller))
-                .paths(PathSelectors.any())
-                .build()
-                .apiInfo(new ApiInfoBuilder()
+        return new OpenAPI()
+                .info(new Info()
                         .title(title)
                         .description(description)
                         .version(version)
-                        .license(license)
-                        .licenseUrl(licenseUrl)
-                        .contact(new Contact(author, authorBlogUrl, email))
-                        .build());
+                        .license(new License().name(license).url(licenseUrl))
+                        .contact(new Contact().name(author).url(authorBlogUrl).email(email)));
     }
 
     private void checkData() {

@@ -14,15 +14,15 @@ import com.pig.easy.bpm.common.utils.JsonResult;
 import com.pig.easy.bpm.common.utils.Result;
 import com.pig.easy.bpm.web.vo.request.TenantQueryVO;
 import com.pig.easy.bpm.web.vo.request.TenantSaveOrUpdateVO;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
-import javax.validation.Valid;
+import jakarta.annotation.Resource;
+import jakarta.validation.Valid;
 
 
 /**
@@ -34,14 +34,14 @@ import javax.validation.Valid;
  * @since 2020-09-02
  */
 @RestController
-@Api(tags = "租户表管理", value = "租户表管理")
+@Tag(name = "租户表管理")
 @RequestMapping("/tenant")
 public class TenantController extends BaseController {
 
     @Resource
     TenantService service;
 
-    @ApiOperation(value = "查询租户表列表", notes = "查询租户表列表", produces = "application/json")
+    @Operation(summary = "查询租户表列表")
     @PostMapping("/getList")
     public JsonResult getList(@Valid @RequestBody TenantQueryVO param) {
 
@@ -56,7 +56,7 @@ public class TenantController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "新增租户表", notes = "新增租户表", produces = "application/json")
+    @Operation(summary = "新增租户表")
     @PostMapping("/insert")
     public JsonResult insertTenant(@Valid @RequestBody TenantSaveOrUpdateVO param) {
 
@@ -73,7 +73,7 @@ public class TenantController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "修改租户表", notes = "修改租户表", produces = "application/json")
+    @Operation(summary = "修改租户表")
     @PostMapping("/update")
     public JsonResult updateTenant(@Valid @RequestBody TenantSaveOrUpdateVO param) {
 
@@ -90,7 +90,7 @@ public class TenantController extends BaseController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "删除租户表", notes = "删除租户表", produces = "application/json")
+    @Operation(summary = "删除租户表")
     @PostMapping("/delete")
     public JsonResult delete(@Valid @RequestBody TenantSaveOrUpdateVO param) {
 

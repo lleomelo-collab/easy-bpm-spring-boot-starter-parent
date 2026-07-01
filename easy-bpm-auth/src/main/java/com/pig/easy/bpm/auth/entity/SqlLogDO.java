@@ -85,11 +85,4 @@ public class SqlLogDO extends Model<SqlLogDO> {
      */
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
-
-
-    @Override
-    protected Serializable pkVal() {
-        return this.logId;
-    }
-
 }

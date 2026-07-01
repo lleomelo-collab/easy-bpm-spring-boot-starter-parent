@@ -118,11 +118,4 @@ public class FileTemplateDO extends Model<FileTemplateDO> {
      */
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
-
-
-    @Override
-    protected Serializable pkVal() {
-        return this.tempalteId;
-    }
-
 }

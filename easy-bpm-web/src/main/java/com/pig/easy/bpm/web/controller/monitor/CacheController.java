@@ -3,7 +3,7 @@ package com.pig.easy.bpm.web.controller.monitor;
 
 import com.pig.easy.bpm.auth.core.controller.BaseController;
 import com.pig.easy.bpm.common.utils.JsonResult;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisCallback;
@@ -26,7 +26,7 @@ public class CacheController extends BaseController {
     @Autowired
     private RedisTemplate redisTemplate;
 
-    @ApiOperation(value = "查询redis信息", notes = "查询redis信息", produces = "application/json")
+    @Operation(summary = "查询redis信息")
     @PostMapping("/getRedisInfo")
     public JsonResult getRedisInfo() throws Exception {
 

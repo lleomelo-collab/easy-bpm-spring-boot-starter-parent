@@ -16,15 +16,15 @@ import com.pig.easy.bpm.generator.dto.response.TableStrategyConfigExportDTO;
 import com.pig.easy.bpm.generator.service.TableStrategyConfigService;
 import com.pig.easy.bpm.generator.vo.request.TableStrategyConfigQueryVO;
 import com.pig.easy.bpm.generator.vo.request.TableStrategyConfigSaveOrUpdateVO;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.List;
@@ -45,7 +45,7 @@ public class TableStrategyConfigController {
     @Autowired
     TableStrategyConfigService service;
 
-    @ApiOperation(value = "查询配置策略表列表", notes = "查询配置策略表列表", produces = "application/json")
+    @Operation(summary = "查询配置策略表列表")
     @PostMapping("/getListPage")
     public JsonResult getListPage(@Valid @RequestBody TableStrategyConfigQueryVO param) {
 
@@ -59,7 +59,7 @@ public class TableStrategyConfigController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "查询配置策略表列表", notes = "查询配置策略表列表", produces = "application/json")
+    @Operation(summary = "查询配置策略表列表")
     @PostMapping("/getList")
     public JsonResult getList(@Valid @RequestBody TableStrategyConfigQueryVO param) {
 
@@ -73,7 +73,7 @@ public class TableStrategyConfigController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "新增配置策略表", notes = "新增配置策略表", produces = "application/json")
+    @Operation(summary = "新增配置策略表")
     @PostMapping("/insert")
     public JsonResult insertTableStrategyConfig(@Valid @RequestBody TableStrategyConfigSaveOrUpdateVO param) {
 
@@ -87,7 +87,7 @@ public class TableStrategyConfigController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "修改配置策略表", notes = "修改配置策略表", produces = "application/json")
+    @Operation(summary = "修改配置策略表")
     @PostMapping("/update")
     public JsonResult updateTableStrategyConfig(@Valid @RequestBody TableStrategyConfigSaveOrUpdateVO param) {
 
@@ -101,7 +101,7 @@ public class TableStrategyConfigController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "删除配置策略表", notes = "删除配置策略表", produces = "application/json")
+    @Operation(summary = "删除配置策略表")
     @PostMapping("/deleteById")
     public JsonResult deleteById(@Valid @RequestBody TableStrategyConfigSaveOrUpdateVO param) {
 
@@ -116,7 +116,7 @@ public class TableStrategyConfigController {
         return JsonResult.success(result.getData());
     }
 
-    @ApiOperation(value = "下载配置策略表", notes = "下载配置策略表", produces = "application/json")
+    @Operation(summary = "下载配置策略表")
     @PostMapping("download")
     public void download(HttpServletResponse response,@Valid @RequestBody TableStrategyConfigQueryVO param) throws IOException {
 
@@ -131,7 +131,7 @@ public class TableStrategyConfigController {
         EasyExcel.write(response.getOutputStream(), TableStrategyConfigExportDTO.class).registerConverter(new LocalDateTimeConverter()).sheet().doWrite(result.getData());
     }
 
-    @ApiOperation(value = "根据编号获取配置策略表", notes = "根据编号获取配置策略表", produces = "application/json")
+    @Operation(summary = "根据编号获取配置策略表")
     @PostMapping("/getById")
     public JsonResult getById(@Valid @RequestBody TableStrategyConfigSaveOrUpdateVO param) {
 

@@ -106,11 +106,4 @@ public class DictItemDO extends Model<DictItemDO> {
      */
     @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createTime;
-
-
-    @Override
-    protected Serializable pkVal() {
-        return this.itemId;
-    }
-
 }
